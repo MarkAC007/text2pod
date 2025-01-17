@@ -120,3 +120,11 @@
 2025-01-17 14:16:10,631 - src.utils.openai_client - INFO - OpenAI API response received in 2.70 seconds
 2025-01-17 14:16:10,631 - src.utils.content_analyzer - INFO - Cleaning content based on structural analysis
 2025-01-17 14:16:10,633 - src.utils.error_handler - WARNING - Attempt 2 failed: Error extracting text: Error analyzing document structure: string indices must be integers. Retrying...
+2025-01-17 14:16:22,254 - src.document_processor - INFO - Analyzing document structure
+2025-01-17 14:16:22,255 - src.utils.content_analyzer - INFO - Analyzing document structure
+2025-01-17 14:16:22,255 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 14:16:26,173 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-17 14:16:26,178 - src.utils.openai_client - INFO - OpenAI API response received in 3.92 seconds
+2025-01-17 14:16:26,179 - src.utils.content_analyzer - INFO - Cleaning content based on structural analysis
+2025-01-17 14:16:26,179 - __main__ - ERROR - Error processing Modern_DevOps_Practices.pdf: Error extracting text: Error analyzing document structure: string indices must be integers
+2025-01-17 14:16:26,180 - __main__ - INFO - Processing complete

@@ -2,4 +2,4 @@
 *.pdf
 *.json
 text2pod/.env
-text2pod/text2pod.log
+*.log
