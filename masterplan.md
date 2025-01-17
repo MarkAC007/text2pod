@@ -1,7 +1,7 @@
 # MASTERPLAN.md
 
 ## 1. App Overview and Objectives
-Text2Pod is a Python-based CLI application that converts consulting knowledge documents into engaging podcast-style audio content through automated workflow.
+Text2Pod is a standalone Python CLI application that converts consulting knowledge documents into engaging podcast-style audio content through automated workflow.
 
 ### Primary Objectives:
 - Convert PDF/Word documents into natural dialogue scripts
@@ -10,7 +10,8 @@ Text2Pod is a Python-based CLI application that converts consulting knowledge do
 - Provide user control over format and technical depth
 - Ensure reliable processing with proper error handling
 
-## 2. Technical Stack
+## 2. Technical Stack & Project Structure
+
 ### Core Technologies:
 - Python 3.x
 - OpenAI GPT-4 API Model: `gpt-4o-mini`
@@ -19,6 +20,36 @@ Text2Pod is a Python-based CLI application that converts consulting knowledge do
 - Environment Management: python-dotenv
 - Progress Tracking: tqdm
 - Error Handling: logging
+
+### Project Structure:
+```plaintext
+text2pod/
+├── src/
+│   ├── cli.py              # Main entry point
+│   ├── document_processor.py
+│   ├── script_generator.py
+│   ├── audio_generator.py
+│   └── utils/
+│       ├── config.py       # Configuration management
+│       ├── error_handler.py
+│       └── progress.py
+├── tests/
+│   ├── test_document_processor.py
+│   ├── test_script_generator.py
+│   ├── test_audio_generator.py
+│   └── test_files/
+│       └── sample.pdf
+├── input/                  # Document input directory
+├── output/                # Generated audio output
+├── .env                   # Environment configuration
+└── requirements.txt       # Project dependencies
+```
+
+### Running the Application:
+```bash
+# From project root
+python src/cli.py input/document.pdf [options]
+```
 
 ## 3. Workflow Architecture
 
@@ -132,7 +163,7 @@ flowchart TD
 
 ## 5. CLI Interface Design
 ```plaintext
-Usage: podcast_generator.py [options] input_file
+Usage: python src/cli.py [options] input_file
 
 Options:
   --format        Override suggested format
@@ -232,35 +263,33 @@ Options:
 ```plaintext
 text2pod/
 ├── src/
-│   ├── __init__.py
+│   ├── cli.py              # Main entry point
 │   ├── document_processor.py
 │   ├── script_generator.py
 │   ├── audio_generator.py
-│   ├── utils/
-│   │   ├── __init__.py
-│   │   ├── config.py
-│   │   ├── error_handler.py
-│   │   └── progress.py
-│   └── cli.py
+│   └── utils/
+│       ├── config.py       # Configuration management
+│       ├── error_handler.py
+│       └── progress.py
 ├── tests/
-│   ├── __init__.py
 │   ├── test_document_processor.py
 │   ├── test_script_generator.py
-│   └── test_audio_generator.py
-├── config/
-│   ├── logging.yaml
-│   └── voice_config.yaml
-├── requirements.txt
-├── setup.py
-└── README.md
+│   ├── test_audio_generator.py
+│   └── test_files/
+│       └── sample.pdf
+├── input/                  # Document input directory
+├── output/                # Generated audio output
+├── .env                   # Environment configuration
+└── requirements.txt       # Project dependencies
 ```
 
 ## 14. Getting Started
 1. Clone repository
-2. Create virtual environment
-3. Install dependencies: `pip install -r requirements.txt`
-4. Configure `.env` file with API keys
-5. Run: `python -m text2pod [options] input_file`
+2. Create virtual environment: `python -m venv venv`
+3. Activate environment: `source venv/bin/activate`
+4. Install dependencies: `pip install -r requirements.txt`
+5. Create .env file with API keys
+6. Run: `python src/cli.py input/document.pdf`
 
 ## 15. Contributing Guidelines
 - Code style: PEP 8
@@ -268,3 +297,24 @@ text2pod/
 - Testing: pytest
 - Branch naming: feature/, bugfix/, hotfix/
 - Commit messages: Conventional Commits
+
+## Development Workflow
+1. Start with document processing (PDF support first)
+2. Implement script generation
+3. Add audio generation
+4. Enhance with error handling and progress tracking
+5. Add configuration options and CLI parameters
+
+## Testing Strategy
+1. Create test files in tests/test_files/
+2. Run tests using pytest
+3. Manual CLI testing with sample documents
+4. Error condition testing
+
+## Getting Started
+1. Clone repository
+2. Create virtual environment: `python -m venv venv`
+3. Activate environment: `source venv/bin/activate`
+4. Install dependencies: `pip install -r requirements.txt`
+5. Create .env file with API keys
+6. Run: `python src/cli.py input/document.pdf`
