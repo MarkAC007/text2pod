@@ -62,4 +62,16 @@ class APIError(Text2PodError):
 
 class ContentAnalysisError(Text2PodError):
     """Raised when there's an error analyzing document content."""
+    pass
+
+class TokenError(Text2PodError):
+    """Raised when there's an error with token management."""
+    pass
+
+class UserCancelled(Text2PodError):
+    """Raised when user cancels an operation."""
+    pass
+
+class VoiceProcessingError(Text2PodError):
+    """Raised when there's an error with voice processing."""
     pass 

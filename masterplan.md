@@ -18,8 +18,10 @@ Text2Pod is a standalone Python CLI application that converts consulting knowled
 - ElevenLabs API
 - Document Processing: PyPDF2, python-docx
 - Environment Management: python-dotenv
-- Progress Tracking: tqdm
+- Progress Tracking: tqdm with enhanced formatting
 - Error Handling: logging
+- Token Management: tiktoken
+- Table Formatting: tabulate
 
 ### Project Structure:
 ```plaintext
@@ -32,7 +34,11 @@ text2pod/
 │   └── utils/
 │       ├── config.py       # Configuration management
 │       ├── error_handler.py
-│       └── progress.py
+│       ├── token_manager.py # Token counting and chunking
+│       ├── openai_client.py # OpenAI API interactions
+│       ├── content_analyzer.py # Content analysis
+│       ├── interactive.py   # Interactive mode utilities
+│       └── progress.py     # Progress tracking
 ├── tests/
 │   ├── test_document_processor.py
 │   ├── test_script_generator.py
@@ -56,265 +62,174 @@ python src/cli.py input/document.pdf [options]
 ### 3.1 Document Processing Module
 ```mermaid
 flowchart LR
-    A[Document Input] --> B[Text Extraction]
-    B --> C[Content Cleanup]
-    C --> D[Analysis]
+    A[PDF Input] --> B[Raw Text Extraction]
+    B --> C[Text Cleaning]
+    C --> D[Clean Markdown]
     
-    subgraph Input Types
-        E[PDF]
-        F[Word]
+    subgraph Token Management
+        TM1[Token Counting]
+        TM2[Content Chunking]
+        TM3[Usage Tracking]
     end
     
-    E --> A
-    F --> A
+    subgraph Text Processing
+        D1[Fix OCR Artifacts]
+        D2[Format Structure]
+        D3[Enhance Readability]
+        D4[Preserve Elements]
+    end
+    
+    D --> E[Validated Markdown]
 ```
 
-### 3.2 Script Generation Module
+### 3.2 Content Analysis Module
 ```mermaid
 flowchart LR
-    A[Content Analysis] --> B[Format Selection]
-    B --> C[Content Segmentation]
-    C --> D[Script Generation]
+    A[Clean Markdown] --> B[Content Analysis]
+    B --> C[Podcast Planning]
     
-    subgraph Format Options
-        E[Host/Expert]
-        F[Two Experts]
-        G[Panel Discussion]
+    subgraph Token Management
+        TM1[Chunk Size Calculation]
+        TM2[Response Combination]
+        TM3[Cost Tracking]
     end
     
-    B --> E
-    B --> F
-    B --> G
+    subgraph Analysis Structure
+        PS1[Content Structure]
+        PS2[Technical Elements]
+        PS3[Conversation Plan]
+    end
+    
+    subgraph Output JSON
+        J1[Podcast Format]
+        J2[Segments]
+        J3[Overall Notes]
+    end
+    
+    C --> J1
+    C --> J2
+    C --> J3
 ```
 
-### 3.3 Audio Generation Module
+### 3.3 Processing Pipeline Stages
+
+1. Document Processing
+    - Extract raw text from PDF
+    - Clean and normalize text
+    - Convert to structured markdown
+    - Validate markdown output
+
+2. Content Analysis
+    - Analyze markdown content
+    - Plan podcast structure
+    - Generate segment breakdown
+    - Create technical glossary
+
+3. Output Generation
+    - Save clean markdown content
+    - Save structured analysis JSON
+    - Generate podcast script (next phase)
+    - Create audio content (next phase)
+
+## 4. Token Management
+
+### Token Limits
+- Maximum context: 128,000 tokens
+- Safety margin: 10% buffer
+- System prompt reserve: 1,000 tokens
+- Response reserve: 4,000 tokens
+
+### Response Formats
+- Text mode: Clean markdown output
+- JSON mode: Structured analysis data
+
+### Content Types
+1. Markdown Content
+    - Proper heading hierarchy
+    - Formatted lists and tables
+    - Code blocks with language tags
+    - Preserved technical terms
+
+2. Analysis Structure
+    - Podcast format recommendation
+    - Segmented content plan
+    - Technical term definitions
+    - Discussion questions
+    - Duration estimates
+
+## 5. Error Handling
+
+### Error Types:
+- DocumentProcessingError
+- APIError
+- ContentAnalysisError
+- TokenError
+- UserCancelled
+
+### Recovery Strategies:
+- Automatic retry with delay
+- Chunk size adjustment
+- Response validation
+- Fallback options
+- Interactive continuation options
+
+## 6. Configuration
+
+### Environment Variables:
+```plaintext
+OPENAI_API_KEY=your_key
+ELEVENLABS_API_KEY=your_key
+OPENAI_MODEL=gpt-4o-mini
+MAX_SEGMENT_LENGTH=5000
+MAX_RETRIES=3
+RETRY_DELAY=1
+MAX_TOKENS=128000
+CHUNK_SIZE=100000
+```
+
+### CLI Options:
+```plaintext
+--debug         Enable debug logging
+--interactive   Enable interactive mode
+--format        Override script format
+```
+
+## 7. Voice Processing
+
+### 7.1 Voice Processing Flow
 ```mermaid
 flowchart LR
-    A[Script Ready] --> B[Voice Assignment]
-    B --> C[CSV Preparation]
-    C --> D[ElevenLabs API]
-    D --> E[MP3 Output]
+    A[Analysis JSON] --> B[Script Segments]
+    B --> C[Voice Assignment]
+    C --> D[CSV Generation]
     
-    subgraph Voice Config
-        F[Voice Selection]
-        G[Character Mapping]
+    subgraph Voice Management
+        V1[Voice Selection]
+        V2[Style Parameters]
+        V3[Pronunciation Guide]
     end
     
-    F --> B
-    G --> B
-```
-
-### 3.4 Complete Process Flow
-```mermaid
-flowchart TB
-    A[Document Input] --> B[Text Processing]
-    B --> C[GPT-4 Analysis]
-    C --> D[Format Selection]
-    D --> E[Script Generation]
-    E --> F[Voice Assignment]
-    F --> G[Audio Generation]
-    G --> H[Final MP3]
-    
-    subgraph Error Handling
-        I[Retry Logic]
-        J[Error Logging]
-        K[Status Updates]
-    end
-    
-    subgraph Progress Tracking
-        L[CLI Progress]
-        M[Status Messages]
+    subgraph CSV Structure
+        CS1[Segment Text]
+        CS2[Voice ID]
+        CS3[Style Settings]
     end
 ```
 
-### 3.5 Error Handling Flow
-```mermaid
-flowchart TD
-    A[Process Start] --> B{API Call}
-    B -->|Success| C[Continue]
-    B -->|Failure| D{Retry Count < 3}
-    D -->|Yes| E[Wait]
-    E --> B
-    D -->|No| F[Log Error]
-    F --> G[Error Message]
-    G --> H[Exit/Continue Based on Severity]
+### 7.2 ElevenLabs Integration
+- Voice Selection
+    - Host voice for narration
+    - Expert voices for technical content
+    - Panel voices for discussions
+
+- Voice Parameters
+    - Stability: 0.5 (balanced)
+    - Clarity: 0.8 (high for technical content)
+    - Style: 0.3 (natural conversation)
+
+- CSV Format
+```csv
+segment_id,voice_id,text,stability,clarity,style
+intro_001,host_voice,"Welcome to...",0.5,0.8,0.3
+expert_001,expert_voice,"The technical aspect...",0.6,0.9,0.2
 ```
-
-## 4. Implementation Details
-
-### 4.1 Configuration Management
-```plaintext
-.env
-├── OPENAI_API_KEY
-├── ELEVENLABS_API_KEY
-└── VOICE_CONFIGS
-```
-
-### 4.2 Error Handling Strategy
-- Comprehensive logging
-- Graceful failure handling
-- Automatic retries for API calls
-- Transaction-like processing for segments
-
-### 4.3 Progress Tracking
-- CLI progress bars for each stage
-- Status updates for long-running processes
-- Error reporting and recovery options
-
-## 5. CLI Interface Design
-```plaintext
-Usage: python src/cli.py [options] input_file
-
-Options:
-  --format        Override suggested format
-  --technical-depth {low,medium,high}
-  --target-duration MINUTES
-  --regenerate-segment SEGMENT_ID
-```
-
-## 6. Processing Phases
-
-### Phase 1: Document Input
-- [ ] File validation
-- [ ] Format detection
-- [ ] Content extraction
-- Progress: 10%
-
-### Phase 2: Content Analysis
-- [ ] Document structure analysis
-- [ ] Topic identification
-- [ ] Format suggestion
-- Progress: 25%
-
-### Phase 3: Script Generation
-- [ ] Segment planning
-- [ ] Dialogue generation
-- [ ] Review opportunities
-- Progress: 50%
-
-### Phase 4: Voice Processing
-- [ ] Voice assignment
-- [ ] CSV preparation
-- Progress: 75%
-
-### Phase 5: Audio Generation
-- [ ] ElevenLabs processing
-- [ ] MP3 compilation
-- Progress: 100%
-
-## 7. Error Handling and Logging
-
-### 7.1 Logging Levels
-- [ ] INFO: General progress
-- [ ] WARNING: Non-critical issues
-- [ ] ERROR: Critical issues
-- [ ] DEBUG: Development details
-
-### 7.2 Error Recovery
-- [ ] Automatic retry for API calls (max 3 attempts)
-- [ ] Segment-level failure isolation
-- [ ] State preservation for long processes
-
-## 8. Future Expansion Possibilities
-- [ ] Web-based interface
-- [ ] Multi-user support
-- [ ] Audio post-processing
-- [ ] Custom voice training
-- [ ] Script template library
-- [ ] Batch processing
-
-## 9. Security Considerations
-- [ ] Secure API key storage
-- [ ] Content validation
-- [ ] Rate limiting compliance
-- [ ] Error message sanitization
-
-## 10. Performance Optimization
-- [ ] Chunked processing
-- [ ] Parallel processing where applicable
-- [ ] Resource management
-- [ ] Cache management
-
-## 11. Development Phases
-
-### MVP Phase (Current)
-- [ ] Basic document processing
-- [ ] Script generation
-- [ ] ElevenLabs integration
-- [ ] CLI interface
-- [ ] Progress tracking
-- [ ] Basic error handling
-
-### Future Phases
-- [ ] Enhanced error recovery
-- [ ] Web interface
-- [ ] Advanced audio processing
-- [ ] Template management
-- [ ] Batch processing
-- [ ] Analytics
-
-## 12. Testing Strategy
-- [ ] Unit tests for each module
-- [ ] Integration tests for API calls
-- [ ] End-to-end workflow testing
-- [ ] Error condition testing
-
-## 13. Project Structure
-```plaintext
-text2pod/
-├── src/
-│   ├── cli.py              # Main entry point
-│   ├── document_processor.py
-│   ├── script_generator.py
-│   ├── audio_generator.py
-│   └── utils/
-│       ├── config.py       # Configuration management
-│       ├── error_handler.py
-│       └── progress.py
-├── tests/
-│   ├── test_document_processor.py
-│   ├── test_script_generator.py
-│   ├── test_audio_generator.py
-│   └── test_files/
-│       └── sample.pdf
-├── input/                  # Document input directory
-├── output/                # Generated audio output
-├── .env                   # Environment configuration
-└── requirements.txt       # Project dependencies
-```
-
-## 14. Getting Started
-1. Clone repository
-2. Create virtual environment: `python -m venv venv`
-3. Activate environment: `source venv/bin/activate`
-4. Install dependencies: `pip install -r requirements.txt`
-5. Create .env file with API keys
-6. Run: `python src/cli.py input/document.pdf`
-
-## 15. Contributing Guidelines
-- Code style: PEP 8
-- Documentation: Google style docstrings
-- Testing: pytest
-- Branch naming: feature/, bugfix/, hotfix/
-- Commit messages: Conventional Commits
-
-## Development Workflow
-1. Start with document processing (PDF support first)
-2. Implement script generation
-3. Add audio generation
-4. Enhance with error handling and progress tracking
-5. Add configuration options and CLI parameters
-
-## Testing Strategy
-1. Create test files in tests/test_files/
-2. Run tests using pytest
-3. Manual CLI testing with sample documents
-4. Error condition testing
-
-## Getting Started
-1. Clone repository
-2. Create virtual environment: `python -m venv venv`
-3. Activate environment: `source venv/bin/activate`
-4. Install dependencies: `pip install -r requirements.txt`
-5. Create .env file with API keys
-6. Run: `python src/cli.py input/document.pdf`

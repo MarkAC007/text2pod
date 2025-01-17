@@ -128,3 +128,267 @@
 2025-01-17 14:16:26,179 - src.utils.content_analyzer - INFO - Cleaning content based on structural analysis
 2025-01-17 14:16:26,179 - __main__ - ERROR - Error processing Modern_DevOps_Practices.pdf: Error extracting text: Error analyzing document structure: string indices must be integers
 2025-01-17 14:16:26,180 - __main__ - INFO - Processing complete
+2025-01-17 14:18:23,016 - __main__ - INFO - Starting Text2Pod processing
+2025-01-17 14:18:23,017 - __main__ - INFO - Found 1 PDF files to process
+2025-01-17 14:18:23,017 - __main__ - INFO - Processing: Modern_DevOps_Practices.pdf
+2025-01-17 14:18:23,017 - __main__ - INFO - File size: 6497.35 KB
+2025-01-17 14:18:30,983 - src.document_processor - INFO - Analyzing document structure
+2025-01-17 14:18:30,983 - src.utils.content_analyzer - INFO - Analyzing document structure
+2025-01-17 14:18:30,984 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 14:18:34,764 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-17 14:18:34,773 - src.utils.openai_client - INFO - OpenAI API response received in 3.79 seconds
+2025-01-17 14:18:34,774 - src.utils.content_analyzer - INFO - Cleaning content based on structural analysis
+2025-01-17 14:18:34,774 - src.utils.content_analyzer - INFO - Main content starts at page 8
+2025-01-17 14:18:34,774 - src.utils.content_analyzer - INFO - Main content ends at page 8
+2025-01-17 14:18:34,774 - src.utils.content_analyzer - WARNING - No content remained after cleaning
+2025-01-17 14:18:34,775 - src.document_processor - INFO - Cleaned content: 518 pages (from 518 original pages)
+2025-01-17 14:18:34,776 - __main__ - INFO - Successfully processed Modern_DevOps_Practices.pdf: 518 pages
+2025-01-17 14:18:34,776 - __main__ - INFO - Generating script for Modern_DevOps_Practices.pdf
+2025-01-17 14:18:34,776 - src.script_generator - INFO - Initializing script generator
+2025-01-17 14:18:34,777 - src.script_generator - INFO - Starting content analysis
+2025-01-17 14:18:34,777 - src.utils.openai_client - INFO - Starting content analysis with model: gpt-4o-mini
+2025-01-17 14:18:34,778 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 14:18:38,596 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-17 14:18:38,600 - src.utils.openai_client - INFO - OpenAI API response received in 3.82 seconds
+2025-01-17 14:18:38,601 - src.script_generator - INFO - Received 6 suggested segments
+2025-01-17 14:18:38,601 - src.script_generator - INFO - Format recommendation: host_expert
+2025-01-17 14:18:38,602 - src.script_generator - INFO - Reasoning: The content focuses on Modern DevOps Practices, which can be complex and technical. A host-expert format allows for a deep dive into specific topics with a single expert, making it easier to manage the technical depth while maintaining clarity. The host can guide the conversation based on the individual's experiences and insights while keeping the audience engaged through focused storytelling and practical insights. This format also helps in managing the complexity of the topics without overwhelming listeners, as the host can distill and highlight key points from the expert's knowledge.
+2025-01-17 14:18:38,603 - src.script_generator - INFO - Starting content segmentation
+2025-01-17 14:18:38,603 - src.script_generator - INFO - Created segment: Introduction to Modern DevOps Practices (5889 chars)
+2025-01-17 14:18:38,603 - src.script_generator - INFO - Created segment: Implementing DevOps in the Public Cloud (5349 chars)
+2025-01-17 14:18:38,604 - src.script_generator - INFO - Created segment: Best Practices and Tools in DevOps (7076 chars)
+2025-01-17 14:18:38,604 - src.script_generator - INFO - Created segment: Security Considerations in DevOps (5332 chars)
+2025-01-17 14:18:38,604 - src.script_generator - INFO - Created segment: Common Challenges in Adopting DevOps (5576 chars)
+2025-01-17 14:18:38,604 - src.script_generator - INFO - Created segment: Future Trends in DevOps (7061 chars)
+2025-01-17 14:18:38,673 - src.script_generator - INFO - Created final segment: Segment 7 (702353 chars)
+2025-01-17 14:18:38,673 - src.script_generator - INFO - Content segmentation complete. Created 7 segments
+2025-01-17 14:18:38,680 - __main__ - INFO - Script saved to: c:\github\text2pod\text2pod\output\Modern_DevOps_Practices_script.json
+2025-01-17 14:18:38,681 - __main__ - INFO - Processing complete
+2025-01-17 14:28:00,046 - __main__ - INFO - Starting Text2Pod processing
+2025-01-17 14:28:00,047 - __main__ - INFO - Found 1 PDF files to process
+2025-01-17 14:28:00,047 - __main__ - INFO - Processing: Modern_DevOps_Practices.pdf
+2025-01-17 14:28:00,048 - __main__ - INFO - File size: 6497.35 KB
+2025-01-17 14:28:00,048 - src.document_processor - INFO - Extracting raw text from PDF
+2025-01-17 14:28:07,575 - src.document_processor - INFO - Extracted 768025 characters of raw text
+2025-01-17 14:28:07,575 - src.document_processor - INFO - Converting text to markdown format
+2025-01-17 14:28:07,575 - src.utils.content_analyzer - INFO - Converting text to markdown format
+2025-01-17 14:28:07,576 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 14:28:09,136 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-01-17 14:28:09,139 - src.utils.openai_client - ERROR - OpenAI API error: Error code: 400 - {'error': {'message': "This model's maximum context length is 128000 tokens. However, your messages resulted in 178501 tokens. Please reduce the length of the messages.", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}
+2025-01-17 14:28:09,139 - src.utils.error_handler - WARNING - Attempt 1 failed: OpenAI API error: Error code: 400 - {'error': {'message': "This model's maximum context length is 128000 tokens. However, your messages resulted in 178501 tokens. Please reduce the length of the messages.", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}. Retrying...
+2025-01-17 14:28:10,149 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 14:28:11,172 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-01-17 14:28:11,173 - src.utils.openai_client - ERROR - OpenAI API error: Error code: 400 - {'error': {'message': "This model's maximum context length is 128000 tokens. However, your messages resulted in 178501 tokens. Please reduce the length of the messages.", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}
+2025-01-17 14:28:11,174 - src.utils.error_handler - WARNING - Attempt 2 failed: OpenAI API error: Error code: 400 - {'error': {'message': "This model's maximum context length is 128000 tokens. However, your messages resulted in 178501 tokens. Please reduce the length of the messages.", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}. Retrying...
+2025-01-17 14:28:12,184 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 14:28:13,156 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-01-17 14:28:13,157 - src.utils.openai_client - ERROR - OpenAI API error: Error code: 400 - {'error': {'message': "This model's maximum context length is 128000 tokens. However, your messages resulted in 178501 tokens. Please reduce the length of the messages.", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}
+2025-01-17 14:28:13,158 - src.utils.error_handler - WARNING - Attempt 1 failed: Error processing document: Error formatting markdown: OpenAI API error: Error code: 400 - {'error': {'message': "This model's maximum context length is 128000 tokens. However, your messages resulted in 178501 tokens. Please reduce the length of the messages.", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}. Retrying...
+2025-01-17 14:28:14,163 - src.document_processor - INFO - Extracting raw text from PDF
+2025-01-17 14:28:23,115 - src.document_processor - INFO - Extracted 768025 characters of raw text
+2025-01-17 14:28:23,115 - src.document_processor - INFO - Converting text to markdown format
+2025-01-17 14:28:23,116 - src.utils.content_analyzer - INFO - Converting text to markdown format
+2025-01-17 14:28:23,116 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 14:28:24,231 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-01-17 14:28:24,233 - src.utils.openai_client - ERROR - OpenAI API error: Error code: 400 - {'error': {'message': "This model's maximum context length is 128000 tokens. However, your messages resulted in 178501 tokens. Please reduce the length of the messages.", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}
+2025-01-17 14:28:24,234 - src.utils.error_handler - WARNING - Attempt 1 failed: OpenAI API error: Error code: 400 - {'error': {'message': "This model's maximum context length is 128000 tokens. However, your messages resulted in 178501 tokens. Please reduce the length of the messages.", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}. Retrying...
+2025-01-17 14:28:25,245 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 14:33:45,628 - __main__ - INFO - Starting Text2Pod processing
+2025-01-17 14:33:45,629 - __main__ - INFO - Found 1 PDF files to process
+2025-01-17 14:33:45,629 - __main__ - INFO - Processing: Modern_DevOps_Practices.pdf
+2025-01-17 14:33:45,629 - __main__ - INFO - File size: 6497.35 KB
+2025-01-17 14:33:45,630 - src.document_processor - INFO - Extracting raw text from PDF
+2025-01-17 14:33:53,773 - src.document_processor - INFO - Extracted 768025 characters of raw text
+2025-01-17 14:33:53,773 - src.document_processor - INFO - Converting text to markdown format
+2025-01-17 14:33:53,774 - src.utils.content_analyzer - INFO - Converting text to markdown format
+2025-01-17 14:33:53,775 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 14:33:53,916 - src.utils.token_manager - INFO - Split text into 2 chunks
+2025-01-17 14:33:53,916 - src.utils.openai_client - INFO - Processing chunk 1/2
+2025-01-17 14:33:54,828 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-01-17 14:33:54,831 - src.utils.openai_client - ERROR - OpenAI API error: Error code: 400 - {'error': {'message': "This model's maximum context length is 128000 tokens. However, your messages resulted in 130033 tokens. Please reduce the length of the messages.", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}
+2025-01-17 14:33:54,831 - src.utils.error_handler - WARNING - Attempt 1 failed: OpenAI API error: Error code: 400 - {'error': {'message': "This model's maximum context length is 128000 tokens. However, your messages resulted in 130033 tokens. Please reduce the length of the messages.", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}. Retrying...
+2025-01-17 14:33:55,834 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 14:33:56,040 - src.utils.token_manager - INFO - Split text into 2 chunks
+2025-01-17 14:33:56,041 - src.utils.openai_client - INFO - Processing chunk 1/2
+2025-01-17 14:33:56,683 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-01-17 14:33:56,684 - src.utils.openai_client - ERROR - OpenAI API error: Error code: 400 - {'error': {'message': "This model's maximum context length is 128000 tokens. However, your messages resulted in 130033 tokens. Please reduce the length of the messages.", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}
+2025-01-17 14:33:56,684 - src.utils.error_handler - WARNING - Attempt 2 failed: OpenAI API error: Error code: 400 - {'error': {'message': "This model's maximum context length is 128000 tokens. However, your messages resulted in 130033 tokens. Please reduce the length of the messages.", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}. Retrying...
+2025-01-17 14:33:57,692 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 14:33:57,847 - src.utils.token_manager - INFO - Split text into 2 chunks
+2025-01-17 14:33:57,848 - src.utils.openai_client - INFO - Processing chunk 1/2
+2025-01-17 14:33:58,449 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-01-17 14:33:58,451 - src.utils.openai_client - ERROR - OpenAI API error: Error code: 400 - {'error': {'message': "This model's maximum context length is 128000 tokens. However, your messages resulted in 130033 tokens. Please reduce the length of the messages.", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}
+2025-01-17 14:33:58,451 - src.utils.error_handler - WARNING - Attempt 1 failed: Error processing document: Error formatting markdown: OpenAI API error: Error code: 400 - {'error': {'message': "This model's maximum context length is 128000 tokens. However, your messages resulted in 130033 tokens. Please reduce the length of the messages.", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}. Retrying...
+2025-01-17 14:33:59,456 - src.document_processor - INFO - Extracting raw text from PDF
+2025-01-17 14:35:22,463 - __main__ - INFO - Starting Text2Pod processing
+2025-01-17 14:35:22,465 - __main__ - INFO - Found 1 PDF files to process
+2025-01-17 14:35:22,465 - __main__ - INFO - Processing: Modern_DevOps_Practices.pdf
+2025-01-17 14:35:22,465 - __main__ - INFO - File size: 6497.35 KB
+2025-01-17 14:35:22,465 - src.document_processor - INFO - Extracting raw text from PDF
+2025-01-17 14:35:30,653 - src.document_processor - INFO - Extracted 768025 characters of raw text
+2025-01-17 14:35:30,654 - src.document_processor - INFO - Converting text to markdown format
+2025-01-17 14:35:30,655 - src.utils.content_analyzer - INFO - Converting text to markdown format
+2025-01-17 14:35:30,655 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 14:35:30,811 - src.utils.token_manager - INFO - Split text into 2 chunks
+2025-01-17 14:35:31,100 - src.utils.openai_client - INFO - Processing chunk 1/2
+2025-01-17 14:37:34,623 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-17 14:37:34,631 - src.utils.token_manager - INFO - Token usage - Prompt: 122726, Completion: 924, Cost: $0.1246
+2025-01-17 14:37:34,631 - src.utils.openai_client - INFO - Chunk 1 processed in 123.53 seconds
+2025-01-17 14:37:34,632 - src.utils.openai_client - INFO - Processing chunk 2/2
+2025-01-17 14:43:46,354 - __main__ - INFO - Starting Text2Pod processing
+2025-01-17 14:43:46,355 - __main__ - INFO - Found 1 PDF files to process
+2025-01-17 14:43:46,355 - __main__ - INFO - Processing: Modern_DevOps_Practices.pdf
+2025-01-17 14:43:46,356 - __main__ - INFO - File size: 6497.35 KB
+2025-01-17 14:43:46,356 - src.document_processor - INFO - Extracting raw text from PDF
+2025-01-17 14:43:54,117 - src.document_processor - INFO - Extracted 768025 characters of raw text
+2025-01-17 14:43:54,118 - src.document_processor - INFO - Converting text to markdown format
+2025-01-17 14:43:54,118 - src.utils.content_analyzer - INFO - Converting text to markdown format
+2025-01-17 14:43:54,119 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 14:43:54,255 - src.utils.token_manager - INFO - Split text into 2 chunks
+2025-01-17 14:43:54,537 - src.utils.openai_client - INFO - Processing chunk 1/2
+2025-01-17 14:43:54,538 - src.utils.openai_client - INFO - Starting chunk 1 processing with 2 messages
+2025-01-17 14:44:29,183 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-17 14:44:29,194 - src.utils.token_manager - INFO - Token usage - Prompt: 122726, Completion: 509, Cost: $0.1237
+2025-01-17 14:44:29,195 - src.utils.openai_client - INFO - Chunk 1 processed in 34.66 seconds
+2025-01-17 14:44:29,195 - src.utils.openai_client - INFO - Processing chunk 2/2
+2025-01-17 14:44:29,195 - src.utils.openai_client - INFO - Starting chunk 2 processing with 2 messages
+2025-01-17 14:44:47,056 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-17 14:44:47,063 - src.utils.token_manager - INFO - Token usage - Prompt: 55964, Completion: 48, Cost: $0.0561
+2025-01-17 14:44:47,063 - src.utils.openai_client - INFO - Chunk 2 processed in 17.87 seconds
+2025-01-17 14:44:47,063 - src.utils.token_manager - INFO - === Token Usage Report ===
+2025-01-17 14:44:47,065 - src.utils.token_manager - INFO - Model: gpt-4o-mini
+2025-01-17 14:44:47,065 - src.utils.token_manager - INFO - Total Requests: 2
+2025-01-17 14:44:47,065 - src.utils.token_manager - INFO - Total Tokens: 179,247
+2025-01-17 14:44:47,065 - src.utils.token_manager - INFO -   - Prompt Tokens: 178,690
+2025-01-17 14:44:47,065 - src.utils.token_manager - INFO -   - Completion Tokens: 557
+2025-01-17 14:44:47,066 - src.utils.token_manager - INFO - Average Tokens/Request: 89,624
+2025-01-17 14:44:47,066 - src.utils.token_manager - INFO - Total Cost: $0.1798
+2025-01-17 14:44:47,066 - src.utils.token_manager - INFO - =======================
+2025-01-17 14:44:47,066 - src.utils.openai_client - ERROR - OpenAI API error: 'format'
+2025-01-17 14:44:47,066 - src.utils.error_handler - WARNING - Attempt 1 failed: OpenAI API error: 'format'. Retrying...
+2025-01-17 14:44:48,069 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 14:44:48,249 - src.utils.token_manager - INFO - Split text into 2 chunks
+2025-01-17 14:44:48,626 - src.utils.openai_client - INFO - Processing chunk 1/2
+2025-01-17 14:44:48,627 - src.utils.openai_client - INFO - Starting chunk 1 processing with 2 messages
+2025-01-17 14:50:04,945 - __main__ - INFO - Starting Text2Pod processing
+2025-01-17 14:50:04,946 - __main__ - INFO - Found 1 PDF files to process
+2025-01-17 14:50:04,946 - __main__ - INFO - Processing: Modern_DevOps_Practices.pdf
+2025-01-17 14:50:04,947 - __main__ - INFO - File size: 6497.35 KB
+2025-01-17 14:50:04,947 - src.document_processor - INFO - Extracting raw text from PDF
+2025-01-17 14:50:13,263 - src.document_processor - INFO - Extracted 768025 characters of raw text
+2025-01-17 14:50:13,263 - src.document_processor - INFO - Converting text to markdown format
+2025-01-17 14:50:13,263 - src.utils.content_analyzer - INFO - Converting text to markdown format
+2025-01-17 14:50:13,263 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 14:50:13,401 - src.utils.token_manager - INFO - Split text into 2 chunks
+2025-01-17 14:50:13,670 - src.utils.openai_client - INFO - Processing chunk 1/2
+2025-01-17 14:50:13,670 - src.utils.openai_client - INFO - Starting chunk 1 processing with 2 messages
+2025-01-17 15:01:40,625 - __main__ - INFO - Starting Text2Pod processing
+2025-01-17 15:01:40,625 - __main__ - ERROR - Fatal error occurred
+Traceback (most recent call last):
+  File "C:\GitHub\text2pod\text2pod\src\cli.py", line 84, in main
+    process_input_directory(interactive=args.interactive)
+TypeError: process_input_directory() got an unexpected keyword argument 'interactive'
+2025-01-17 15:03:29,442 - __main__ - INFO - Starting Text2Pod processing
+2025-01-17 15:03:29,443 - __main__ - INFO - Found 1 PDF files to process
+2025-01-17 15:03:29,443 - __main__ - INFO - Processing: Modern_DevOps_Practices.pdf
+2025-01-17 15:03:29,443 - __main__ - INFO - File size: 6497.35 KB
+2025-01-17 15:03:29,452 - src.document_processor - INFO - Extracting raw text from PDF
+2025-01-17 15:03:48,853 - src.document_processor - INFO - Extracted 768025 characters of raw text
+2025-01-17 15:03:57,568 - src.document_processor - INFO - Converting text to markdown format
+2025-01-17 15:03:57,570 - src.utils.content_analyzer - INFO - Converting text to markdown format
+2025-01-17 15:03:57,570 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 15:03:57,984 - src.utils.openai_client - INFO - Processing chunk 1/2
+2025-01-17 15:03:57,985 - src.utils.openai_client - INFO - Starting chunk 1 processing with 2 messages
+2025-01-17 15:05:36,191 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-17 15:05:36,348 - src.utils.token_manager - INFO - Token usage - Prompt: 110726, Completion: 1810, Cost: $0.1143
+2025-01-17 15:05:36,348 - src.utils.openai_client - INFO - Chunk 1 processed in 98.36 seconds
+2025-01-17 15:05:36,348 - src.utils.openai_client - INFO - Processing chunk 2/2
+2025-01-17 15:05:36,349 - src.utils.openai_client - INFO - Starting chunk 2 processing with 2 messages
+2025-01-17 15:07:46,086 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-17 15:07:46,103 - src.utils.token_manager - INFO - Token usage - Prompt: 67964, Completion: 2508, Cost: $0.0730
+2025-01-17 15:07:46,104 - src.utils.openai_client - INFO - Chunk 2 processed in 129.75 seconds
+2025-01-17 15:07:46,106 - src.utils.token_manager - INFO - === Token Usage Report ===
+2025-01-17 15:07:46,106 - src.utils.token_manager - INFO - Model: gpt-4o-mini
+2025-01-17 15:07:46,107 - src.utils.token_manager - INFO - Total Requests: 2
+2025-01-17 15:07:46,107 - src.utils.token_manager - INFO - Total Tokens: 183,008
+2025-01-17 15:07:46,107 - src.utils.token_manager - INFO - Prompt Tokens: 178,690
+2025-01-17 15:07:46,107 - src.utils.token_manager - INFO - Completion Tokens: 4,318
+2025-01-17 15:07:46,107 - src.utils.token_manager - INFO - Avg Tokens/Request: 91,504
+2025-01-17 15:07:46,108 - src.utils.token_manager - INFO - Total Cost: $0.1873
+2025-01-17 15:07:46,108 - src.utils.token_manager - INFO - =======================
+2025-01-17 15:07:46,110 - src.utils.openai_client - INFO - Combined multiple chunk responses
+2025-01-17 15:07:46,110 - src.utils.content_analyzer - INFO - Markdown conversion complete
+2025-01-17 15:07:46,111 - src.document_processor - INFO - Text converted to markdown successfully
+2025-01-17 15:09:06,546 - src.document_processor - INFO - Analyzing markdown content
+2025-01-17 15:09:06,547 - src.utils.content_analyzer - INFO - Analyzing markdown content
+2025-01-17 15:09:06,547 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 15:09:06,550 - src.utils.openai_client - INFO - Processing chunk 1/1
+2025-01-17 15:09:06,550 - src.utils.openai_client - INFO - Starting chunk 1 processing with 2 messages
+2025-01-17 15:09:16,600 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-17 15:09:16,608 - src.utils.token_manager - INFO - Token usage - Prompt: 294, Completion: 644, Cost: $0.0016
+2025-01-17 15:09:16,608 - src.utils.openai_client - INFO - Chunk 1 processed in 10.06 seconds
+2025-01-17 15:09:16,610 - src.utils.content_analyzer - INFO - Content analysis complete: 4 segments identified
+2025-01-17 15:09:16,610 - src.document_processor - INFO - Content analysis complete
+2025-01-17 15:09:16,613 - __main__ - INFO - Markdown content saved to: c:\github\text2pod\text2pod\output\Modern_DevOps_Practices_content.md
+2025-01-17 15:09:26,529 - __main__ - INFO - Content analysis saved to: c:\github\text2pod\text2pod\output\Modern_DevOps_Practices_analysis.json
+2025-01-17 15:09:26,529 - __main__ - INFO - Processing complete
+2025-01-17 15:09:26,531 - src.utils.token_manager - INFO - === Token Usage Report ===
+2025-01-17 15:09:26,531 - src.utils.token_manager - INFO - Model: gpt-4o-mini
+2025-01-17 15:09:26,531 - src.utils.token_manager - INFO - Total Requests: 3
+2025-01-17 15:09:26,532 - src.utils.token_manager - INFO - Total Tokens: 183,946
+2025-01-17 15:09:26,532 - src.utils.token_manager - INFO - Prompt Tokens: 178,984
+2025-01-17 15:09:26,532 - src.utils.token_manager - INFO - Completion Tokens: 4,962
+2025-01-17 15:09:26,532 - src.utils.token_manager - INFO - Avg Tokens/Request: 61,315
+2025-01-17 15:09:26,532 - src.utils.token_manager - INFO - Total Cost: $0.1889
+2025-01-17 15:09:26,533 - src.utils.token_manager - INFO - =======================
+2025-01-17 15:18:32,084 - __main__ - INFO - Starting Text2Pod processing
+2025-01-17 15:18:32,085 - __main__ - INFO - Found 1 PDF files to process
+2025-01-17 15:18:32,085 - __main__ - INFO - Processing: Modern_DevOps_Practices.pdf
+2025-01-17 15:18:32,085 - __main__ - INFO - File size: 6497.35 KB
+2025-01-17 15:18:39,674 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 15:18:40,197 - src.utils.openai_client - INFO - Processing chunk 1/2
+2025-01-17 15:19:48,488 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-17 15:19:48,500 - src.utils.token_manager - INFO - Token usage - Prompt: 110725, Completion: 1559, Cost: $0.1138
+2025-01-17 15:19:48,500 - src.utils.openai_client - INFO - Processing chunk 2/2
+2025-01-17 15:21:34,305 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-17 15:21:34,310 - src.utils.token_manager - INFO - Token usage - Prompt: 67962, Completion: 2516, Cost: $0.0730
+2025-01-17 15:21:34,313 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 15:21:34,338 - src.utils.openai_client - INFO - Processing chunk 1/1
+2025-01-17 15:22:08,679 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-17 15:22:08,693 - src.utils.token_manager - INFO - Token usage - Prompt: 4376, Completion: 802, Cost: $0.0060
+2025-01-17 15:22:08,696 - __main__ - INFO - Markdown content saved to: c:\github\text2pod\text2pod\output\Modern_DevOps_Practices_content.md
+2025-01-17 15:22:21,060 - __main__ - INFO - Content analysis saved to: c:\github\text2pod\text2pod\output\Modern_DevOps_Practices_analysis.json
+2025-01-17 15:22:21,061 - __main__ - INFO - Processing complete
+2025-01-17 15:22:21,063 - src.utils.token_manager - INFO - === Token Usage Report ===
+2025-01-17 15:22:21,063 - src.utils.token_manager - INFO - Model: gpt-4o-mini
+2025-01-17 15:22:21,063 - src.utils.token_manager - INFO - Total Requests: 3
+2025-01-17 15:22:21,063 - src.utils.token_manager - INFO - Total Tokens: 187,940
+2025-01-17 15:22:21,064 - src.utils.token_manager - INFO - Prompt Tokens: 183,063
+2025-01-17 15:22:21,064 - src.utils.token_manager - INFO - Completion Tokens: 4,877
+2025-01-17 15:22:21,064 - src.utils.token_manager - INFO - Avg Tokens/Request: 62,647
+2025-01-17 15:22:21,064 - src.utils.token_manager - INFO - Total Cost: $0.1928
+2025-01-17 15:22:21,064 - src.utils.token_manager - INFO - =======================
+2025-01-17 15:27:25,360 - __main__ - INFO - Starting Text2Pod processing
+2025-01-17 15:27:25,361 - __main__ - INFO - Found 1 PDF files to process
+2025-01-17 15:27:25,361 - __main__ - INFO - Processing: commission-white-paper-artificial-intelligence-feb2020_en.pdf
+2025-01-17 15:27:25,361 - __main__ - INFO - File size: 939.36 KB
+2025-01-17 15:27:27,274 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 15:27:27,332 - src.utils.openai_client - INFO - Processing chunk 1/1
+2025-01-17 15:28:21,417 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-17 15:28:21,568 - src.utils.token_manager - INFO - Token usage - Prompt: 19881, Completion: 2383, Cost: $0.0246
+2025-01-17 15:28:21,569 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 15:28:21,583 - src.utils.openai_client - INFO - Processing chunk 1/1
+2025-01-17 15:28:40,916 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-17 15:28:40,922 - src.utils.token_manager - INFO - Token usage - Prompt: 2684, Completion: 1043, Cost: $0.0048
+2025-01-17 15:28:40,933 - __main__ - INFO - Markdown content saved to: c:\github\text2pod\text2pod\output\commission-white-paper-artificial-intelligence-feb2020_en_content.md
+2025-01-17 15:28:54,206 - __main__ - INFO - Content analysis saved to: c:\github\text2pod\text2pod\output\commission-white-paper-artificial-intelligence-feb2020_en_analysis.json
+2025-01-17 15:28:54,206 - __main__ - INFO - Processing complete
+2025-01-17 15:28:54,206 - src.utils.token_manager - INFO - === Token Usage Report ===
+2025-01-17 15:28:54,207 - src.utils.token_manager - INFO - Model: gpt-4o-mini
+2025-01-17 15:28:54,207 - src.utils.token_manager - INFO - Total Requests: 2
+2025-01-17 15:28:54,207 - src.utils.token_manager - INFO - Total Tokens: 25,991
+2025-01-17 15:28:54,207 - src.utils.token_manager - INFO - Prompt Tokens: 22,565
+2025-01-17 15:28:54,207 - src.utils.token_manager - INFO - Completion Tokens: 3,426
+2025-01-17 15:28:54,207 - src.utils.token_manager - INFO - Avg Tokens/Request: 12,996
+2025-01-17 15:28:54,207 - src.utils.token_manager - INFO - Total Cost: $0.0294
+2025-01-17 15:28:54,207 - src.utils.token_manager - INFO - =======================

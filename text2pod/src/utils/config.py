@@ -30,4 +30,6 @@ OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 # Processing Configuration
 MAX_SEGMENT_LENGTH = int(os.getenv("MAX_SEGMENT_LENGTH", "5000"))
 MAX_RETRIES = int(os.getenv("MAX_RETRIES", "3"))
-RETRY_DELAY = int(os.getenv("RETRY_DELAY", "1")) 
+RETRY_DELAY = int(os.getenv("RETRY_DELAY", "1"))
+MAX_TOKENS = int(os.getenv("MAX_TOKENS", "128000"))  # GPT-4's limit
+CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", "100000"))  # Slightly smaller than limit for safety 
