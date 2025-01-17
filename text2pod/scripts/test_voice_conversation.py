@@ -1,6 +1,7 @@
 """Test ElevenLabs API with multiple voices in conversation."""
 import os
 import logging
+import shutil
 from datetime import datetime
 from pathlib import Path
 from dotenv import load_dotenv
@@ -23,23 +24,45 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
+def check_ffmpeg():
+    """Verify ffmpeg is installed and accessible."""
+    if shutil.which('ffmpeg') is None:
+        raise RuntimeError(
+            "ffmpeg not found. Please install ffmpeg:\n"
+            "Windows (conda): conda install ffmpeg\n"
+            "Windows (chocolatey): choco install ffmpeg\n"
+            "Linux: sudo apt-get install ffmpeg\n"
+            "Mac: brew install ffmpeg"
+        )
+    logger.info("ffmpeg found and accessible")
+
 def merge_audio_segments(segment_files, output_file, crossfade_ms=500):
     """Merge multiple audio segments with crossfade."""
     logger.info("Merging audio segments...")
     
-    # Load the first segment
-    combined = AudioSegment.from_mp3(segment_files[0])
+    # Verify all files exist
+    for file in segment_files:
+        if not file.exists():
+            raise FileNotFoundError(f"Audio segment not found: {file}")
     
-    # Add subsequent segments with crossfade
-    for segment_file in segment_files[1:]:
-        next_segment = AudioSegment.from_mp3(segment_file)
-        combined = combined.append(next_segment, crossfade=crossfade_ms)
+    try:
+        # Load the first segment
+        combined = AudioSegment.from_mp3(str(segment_files[0]))
+        
+        # Add subsequent segments with crossfade
+        for segment_file in segment_files[1:]:
+            next_segment = AudioSegment.from_mp3(str(segment_file))
+            combined = combined.append(next_segment, crossfade=crossfade_ms)
+        
+        # Export the combined audio
+        combined.export(str(output_file), format="mp3")
+        logger.info(f"Merged audio saved to: {output_file}")
+        
+        return output_file
     
-    # Export the combined audio
-    combined.export(output_file, format="mp3")
-    logger.info(f"Merged audio saved to: {output_file}")
-    
-    return output_file
+    except Exception as e:
+        logger.error(f"Error merging audio segments: {e}")
+        raise
 
 def generate_audio(text, voice_id, api_key, voice_settings=None):
     """Generate audio for a single segment."""
@@ -81,6 +104,9 @@ def test_voice_conversation():
     """Test generating a conversation between two voices."""
     try:
         logger.info("=== Starting Voice Conversation Test ===")
+        
+        # Verify ffmpeg installation
+        check_ffmpeg()
         
         # Load API key
         load_dotenv()
