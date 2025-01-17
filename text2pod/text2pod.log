@@ -1,0 +1,3 @@
+2025-01-17 13:24:45,944 - __main__ - ERROR - File not found: c:\github\text2pod\text2pod\input\input\Modern_DevOps_Practices.pdf
+2025-01-17 13:28:51,220 - __main__ - INFO - Found 1 PDF files to process
+2025-01-17 13:28:51,220 - __main__ - INFO - Processing: Modern_DevOps_Practices.pdf

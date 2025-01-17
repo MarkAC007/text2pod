@@ -5,24 +5,22 @@ from typing import Dict, Optional
 
 import PyPDF2
 
-from .utils.config import INPUT_DIR
-from .utils.error_handler import DocumentProcessingError, retry_on_error
-from .utils.progress import ProgressTracker
+from src.utils.config import INPUT_DIR
+from src.utils.error_handler import DocumentProcessingError, retry_on_error
+from src.utils.progress import ProgressTracker
 
 logger = logging.getLogger(__name__)
 
 class DocumentProcessor:
     """Handles the processing of input documents."""
     
-    def __init__(self, file_path: str):
+    def __init__(self, file_path: Path):
         """Initialize the document processor.
         
         Args:
-            file_path: Path to the input document
+            file_path: Path to the input document (Path object)
         """
-        self.file_path = Path(file_path)
-        if not self.file_path.is_absolute():
-            self.file_path = INPUT_DIR / self.file_path
+        self.file_path = file_path if isinstance(file_path, Path) else Path(file_path)
             
         if not self.file_path.exists():
             raise DocumentProcessingError(f"File not found: {self.file_path}")
