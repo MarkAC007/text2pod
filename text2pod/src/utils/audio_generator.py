@@ -11,9 +11,9 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 from pydub import AudioSegment
 
-from .error_handler import ProcessingError
-from .json_processor import PodcastSegment
-from .voice_mapper import VoiceConfig
+from utils.error_handler import ProcessingError
+from utils.json_processor import PodcastSegment
+from utils.voice_mapper import VoiceConfig
 
 logger = logging.getLogger(__name__)
 

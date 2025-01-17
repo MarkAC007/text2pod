@@ -392,3 +392,40 @@ TypeError: process_input_directory() got an unexpected keyword argument 'interac
 2025-01-17 15:28:54,207 - src.utils.token_manager - INFO - Avg Tokens/Request: 12,996
 2025-01-17 15:28:54,207 - src.utils.token_manager - INFO - Total Cost: $0.0294
 2025-01-17 15:28:54,207 - src.utils.token_manager - INFO - =======================
+2025-01-17 22:01:02,526 - __main__ - INFO - Starting Text2Pod
+2025-01-17 22:01:02,527 - __main__ - INFO - Generating podcast from: output\commission-white-paper-artificial-intelligence-feb2020_en_analysis.json
+2025-01-17 22:01:02,533 - __main__ - INFO - Testing service connections...
+2025-01-17 22:01:03,766 - __main__ - INFO - Service connections verified
+2025-01-17 22:01:03,767 - podcast_generator - INFO - Starting podcast generation for commission-white-paper-artificial-intelligence-feb2020_en_analysis
+2025-01-17 22:01:03,768 - podcast_generator - INFO - Processing JSON specification
+2025-01-17 22:01:03,769 - __main__ - ERROR - Failed to generate podcast: Failed to generate podcast: Unsupported podcast style: None
+2025-01-17 22:01:03,771 - __main__ - INFO - Processing complete
+2025-01-17 22:07:34,617 - __main__ - INFO - Starting Text2Pod
+2025-01-17 22:07:34,617 - __main__ - INFO - Generating podcast from: output\commission-white-paper-artificial-intelligence-feb2020_en_analysis.json
+2025-01-17 22:07:34,625 - __main__ - INFO - Testing service connections...
+2025-01-17 22:07:35,199 - __main__ - INFO - Service connections verified
+2025-01-17 22:07:35,201 - podcast_generator - INFO - Starting podcast generation for commission-white-paper-artificial-intelligence-feb2020_en_analysis
+2025-01-17 22:07:35,202 - podcast_generator - INFO - Processing JSON specification
+2025-01-17 22:07:35,204 - podcast_generator - INFO - Generated pronunciations for 6 terms
+2025-01-17 22:07:35,205 - podcast_generator - INFO - Mapping voices to segments
+2025-01-17 22:07:36,178 - podcast_generator - INFO - Generating audio segments
+2025-01-17 22:07:38,165 - utils.audio_generator - INFO - Generated audio for segment intro_001: C:\GitHub\text2pod\text2pod\output\podcasts\commission-white-paper-artificial-intelligence-feb2020_en_analysis\segment_01_host.mp3
+2025-01-17 22:07:40,008 - utils.audio_generator - INFO - Generated audio for segment host_001: C:\GitHub\text2pod\text2pod\output\podcasts\commission-white-paper-artificial-intelligence-feb2020_en_analysis\segment_02_host.mp3
+2025-01-17 22:07:42,264 - utils.audio_generator - INFO - Generated audio for segment expert_001: C:\GitHub\text2pod\text2pod\output\podcasts\commission-white-paper-artificial-intelligence-feb2020_en_analysis\segment_03_expert.mp3
+2025-01-17 22:07:44,035 - utils.audio_generator - INFO - Generated audio for segment host_002: C:\GitHub\text2pod\text2pod\output\podcasts\commission-white-paper-artificial-intelligence-feb2020_en_analysis\segment_04_host.mp3
+2025-01-17 22:07:46,155 - utils.audio_generator - INFO - Generated audio for segment expert_002: C:\GitHub\text2pod\text2pod\output\podcasts\commission-white-paper-artificial-intelligence-feb2020_en_analysis\segment_05_expert.mp3
+2025-01-17 22:07:47,909 - utils.audio_generator - INFO - Generated audio for segment host_003: C:\GitHub\text2pod\text2pod\output\podcasts\commission-white-paper-artificial-intelligence-feb2020_en_analysis\segment_06_host.mp3
+2025-01-17 22:07:49,833 - utils.audio_generator - INFO - Generated audio for segment expert_003: C:\GitHub\text2pod\text2pod\output\podcasts\commission-white-paper-artificial-intelligence-feb2020_en_analysis\segment_07_expert.mp3
+2025-01-17 22:07:51,486 - utils.audio_generator - INFO - Generated audio for segment host_004: C:\GitHub\text2pod\text2pod\output\podcasts\commission-white-paper-artificial-intelligence-feb2020_en_analysis\segment_08_host.mp3
+2025-01-17 22:07:53,384 - utils.audio_generator - INFO - Generated audio for segment expert_004: C:\GitHub\text2pod\text2pod\output\podcasts\commission-white-paper-artificial-intelligence-feb2020_en_analysis\segment_09_expert.mp3
+2025-01-17 22:07:54,916 - utils.audio_generator - INFO - Generated audio for segment host_005: C:\GitHub\text2pod\text2pod\output\podcasts\commission-white-paper-artificial-intelligence-feb2020_en_analysis\segment_10_host.mp3
+2025-01-17 22:07:57,281 - utils.audio_generator - INFO - Generated audio for segment expert_005: C:\GitHub\text2pod\text2pod\output\podcasts\commission-white-paper-artificial-intelligence-feb2020_en_analysis\segment_11_expert.mp3
+2025-01-17 22:07:59,319 - utils.audio_generator - INFO - Generated audio for segment host_006: C:\GitHub\text2pod\text2pod\output\podcasts\commission-white-paper-artificial-intelligence-feb2020_en_analysis\segment_12_host.mp3
+2025-01-17 22:08:01,404 - utils.audio_generator - INFO - Generated audio for segment expert_006: C:\GitHub\text2pod\text2pod\output\podcasts\commission-white-paper-artificial-intelligence-feb2020_en_analysis\segment_13_expert.mp3
+2025-01-17 22:08:02,950 - utils.audio_generator - INFO - Generated audio for segment closing_001: C:\GitHub\text2pod\text2pod\output\podcasts\commission-white-paper-artificial-intelligence-feb2020_en_analysis\segment_14_host.mp3
+2025-01-17 22:08:09,175 - utils.audio_generator - INFO - Merged audio saved to: C:\GitHub\text2pod\text2pod\output\podcasts\commission-white-paper-artificial-intelligence-feb2020_en_analysis\complete_podcast.mp3
+2025-01-17 22:08:09,178 - utils.audio_generator - INFO - Generated complete podcast audio: C:\GitHub\text2pod\text2pod\output\podcasts\commission-white-paper-artificial-intelligence-feb2020_en_analysis\complete_podcast.mp3
+2025-01-17 22:08:09,178 - podcast_generator - INFO - Podcast generation complete: C:\GitHub\text2pod\text2pod\output\podcasts\commission-white-paper-artificial-intelligence-feb2020_en_analysis\complete_podcast.mp3
+2025-01-17 22:08:09,183 - __main__ - INFO - Generated podcast: C:\GitHub\text2pod\text2pod\output\podcasts\commission-white-paper-artificial-intelligence-feb2020_en_analysis\complete_podcast.mp3
+2025-01-17 22:08:09,184 - __main__ - INFO - Metadata saved to: C:\GitHub\text2pod\text2pod\output\podcasts\commission-white-paper-artificial-intelligence-feb2020_en_analysis\commission-white-paper-artificial-intelligence-feb2020_en_analysis_metadata.json
+2025-01-17 22:08:09,185 - __main__ - INFO - Processing complete

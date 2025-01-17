@@ -10,8 +10,8 @@ import requests
 from dataclasses import dataclass
 from pathlib import Path
 
-from .error_handler import ProcessingError
-from .json_processor import PodcastData, PodcastSegment
+from utils.error_handler import ProcessingError
+from utils.json_processor import PodcastData, PodcastSegment
 
 logger = logging.getLogger(__name__)
 

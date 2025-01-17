@@ -1,21 +1,23 @@
 # Text2Pod
 
-Text2Pod is a Python-based CLI application that transforms consulting knowledge documents into engaging podcast-style audio content through an automated workflow.
+Text2Pod is a Python-based CLI application that transforms consulting knowledge documents into engaging podcast-style audio content through an automated workflow. It processes PDF documents, analyzes their content, and generates natural-sounding podcast conversations using AI voices.
 
 ## 🎯 Features
 
-- Convert PDF and Word documents into natural dialogue scripts
+- Convert PDF documents into natural dialogue scripts with multiple speakers
 - Generate professional audio using ElevenLabs voices
-- Maintain content integrity while making it engaging
-- Customize format and technical depth
+- Maintain technical accuracy while making content engaging and accessible
+- Support for multiple podcast formats (host-expert, panel discussions)
+- Customizable technical depth and content style
+- Built-in technical term handling and pronunciation guide
 - Robust error handling and progress tracking
 
 ## 🛠️ Technical Stack
 
 - Python 3.x
-- OpenAI GPT-4 API
-- ElevenLabs API
-- Document Processing: PyPDF2, python-docx
+- OpenAI GPT-4 API for content analysis and script generation
+- ElevenLabs API for voice synthesis
+- Document Processing: PyPDF2
 - Environment Management: python-dotenv
 - Progress Tracking: tqdm
 
@@ -24,8 +26,9 @@ Text2Pod is a Python-based CLI application that transforms consulting knowledge 
 ### Prerequisites
 
 - Python 3.x
-- OpenAI API key
-- ElevenLabs API key
+- OpenAI API key (for content analysis and script generation)
+- ElevenLabs API key (for voice synthesis)
+- Sufficient API credits on both platforms
 
 ### Installation
 
@@ -54,76 +57,128 @@ OPENAI_API_KEY=your_openai_key_here
 ELEVENLABS_API_KEY=your_elevenlabs_key_here
 ```
 
-### Usage
+### Directory Setup
 
-Basic usage:
+1. Create required directories:
 ```bash
-python -m text2pod [options] input_file
+mkdir -p input output
 ```
 
-Available options:
-- `--format`: Override suggested format
-- `--technical-depth`: Set technical depth (low/medium/high)
-- `--target-duration`: Set target duration in minutes
-- `--regenerate-segment`: Regenerate specific segment
+2. Place your PDF documents in the `input` directory
+3. Generated content will appear in the `output` directory
 
-## 🔄 Workflow
+### Usage
 
-1. **Document Processing**: Input PDF/Word documents are processed and cleaned
-2. **Content Analysis**: Document structure and topics are analyzed
-3. **Script Generation**: Content is transformed into natural dialogue
-4. **Voice Processing**: Voices are assigned to different parts
-5. **Audio Generation**: Final podcast-style audio is generated
+Text2Pod supports two main modes of operation, both of which can be run with or without interactive mode:
 
-## 🏗️ Project Structure
+1. **Document Processing Mode** (Default):
+```bash
+# Non-interactive mode (processes all PDFs automatically)
+python src/cli.py
+
+# Interactive mode (asks for confirmation at each step)
+python src/cli.py --interactive
+# or
+python src/cli.py -i
+```
+- Processes all PDF files in the input directory
+- Generates analysis and markdown content
+- Creates JSON files ready for podcast generation
+- Interactive mode allows you to:
+  - Confirm which PDF files to process
+  - Review and adjust analysis settings
+  - Verify processing steps
+
+2. **Podcast Generation Mode**:
+```bash
+# Non-interactive mode
+python src/cli.py --podcast path/to/analysis.json
+
+# Interactive mode
+python src/cli.py --podcast path/to/analysis.json --interactive
+```
+- Takes a processed JSON file
+- Generates podcast-style audio content
+- Creates final audio file and metadata
+- Interactive mode allows you to:
+  - Customize the project name
+  - Review voice assignments
+  - Confirm generation steps
+
+Additional Options:
+- `--format`: Override suggested podcast format
+- `--cleanup`: Clean up intermediate audio files after generation
+- `--debug`: Enable detailed debug logging
+
+## 📁 Project Structure
 
 ```plaintext
 text2pod/
 ├── src/
-│   ├── document_processor.py
-│   ├── script_generator.py
-│   ├── audio_generator.py
+│   ├── document_processor.py   # PDF processing and content extraction
+│   ├── script_generator.py     # Converts analysis to dialogue scripts
+│   ├── podcast_generator.py    # Handles podcast audio generation
 │   ├── utils/
-│   │   ├── config.py
-│   │   ├── error_handler.py
-│   │   └── progress.py
-│   └── cli.py
-├── tests/
-├── config/
-└── requirements.txt
+│   │   ├── json_processor.py   # JSON data handling and validation
+│   │   ├── voice_mapper.py     # Voice assignment and configuration
+│   │   ├── audio_generator.py  # Audio synthesis and processing
+│   │   ├── content_analyzer.py # Content analysis and structuring
+│   │   ├── token_manager.py    # API token usage tracking
+│   │   ├── error_handler.py    # Error handling and reporting
+│   │   ├── progress.py        # Progress tracking and display
+│   │   ├── interactive.py     # Interactive user prompts
+│   │   ├── config.py         # Configuration management
+│   │   └── openai_client.py  # OpenAI API integration
+│   └── cli.py                # Command-line interface
+├── tests/                    # Test files and fixtures
+├── input/                    # Input PDF documents
+├── output/                   # Generated content
+└── requirements.txt          # Project dependencies
 ```
+
+## 🔄 Processing Pipeline
+
+1. **Document Processing**:
+   - PDF text extraction and cleaning
+   - Document structure analysis
+   - Content segmentation
+
+2. **Content Analysis**:
+   - Topic identification
+   - Technical term extraction
+   - Complexity assessment
+   - Format recommendation
+
+3. **Script Generation**:
+   - Natural dialogue creation
+   - Speaker role assignment
+   - Technical accuracy preservation
+   - Transition smoothing
+
+4. **Voice Processing**:
+   - Voice profile selection
+   - Pronunciation guide generation
+   - Speech parameter optimization
+
+5. **Audio Generation**:
+   - Text-to-speech synthesis
+   - Audio segment processing
+   - Final file compilation
 
 ## 🤝 Contributing
 
 1. Fork the repository
 2. Create your feature branch: `git checkout -b feature/amazing-feature`
-3. Follow code style guidelines:
-   - PEP 8 for Python code
-   - Google style docstrings
-   - Conventional Commits for commit messages
-4. Run tests: `pytest`
+3. Follow code style guidelines
+4. Write clear commit messages
 5. Submit a pull request
 
 ## 📝 License
 
-[Add your license information here]
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 🔮 Future Plans
+## 🙏 Acknowledgments
 
-- Web-based interface
-- Multi-user support
-- Audio post-processing capabilities
-- Custom voice training
-- Script template library
-- Batch processing support
-
-## ⚠️ Security Notes
-
-- API keys are stored securely in `.env`
-- Content validation is implemented
-- Rate limiting compliance is enforced
-- Error messages are sanitized
-
-## 🆘 Support
-
-[Add support contact information or link to issues]
+- OpenAI for GPT-4 API
+- ElevenLabs for voice synthesis
+- All contributors and users of the project

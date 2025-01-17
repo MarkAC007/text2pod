@@ -7,10 +7,10 @@ import logging
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-from .utils.json_processor import JSONProcessor, PodcastData
-from .utils.voice_mapper import VoiceMapper, VoiceConfig
-from .utils.audio_generator import AudioGenerator
-from .utils.error_handler import ProcessingError
+from utils.json_processor import JSONProcessor, PodcastData
+from utils.voice_mapper import VoiceMapper, VoiceConfig
+from utils.audio_generator import AudioGenerator
+from utils.error_handler import ProcessingError
 
 logger = logging.getLogger(__name__)
 

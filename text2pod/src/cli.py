@@ -5,20 +5,17 @@ import logging
 import sys
 from pathlib import Path
 
-from src.document_processor import DocumentProcessor
-from src.script_generator import ScriptGenerator
-from src.utils.config import INPUT_DIR, OUTPUT_DIR
-from src.utils.error_handler import Text2PodError, UserCancelled
-from src.utils.interactive import confirm_step
+from document_processor import DocumentProcessor
+from script_generator import ScriptGenerator
+from podcast_generator import PodcastGenerator
+from utils.config import INPUT_DIR, OUTPUT_DIR
+from utils.error_handler import Text2PodError, UserCancelled
+from utils.interactive import confirm_step
 
 logger = logging.getLogger(__name__)
 
 def process_input_directory(interactive: bool = False):
-    """Process all PDF files in the input directory.
-    
-    Args:
-        interactive: Whether to run in interactive mode
-    """
+    """Process all PDF files in the input directory."""
     if not INPUT_DIR.exists():
         logger.error(f"Input directory not found: {INPUT_DIR}")
         sys.exit(1)
@@ -79,18 +76,90 @@ def process_input_directory(interactive: bool = False):
                 logger.info("Stopping processing")
                 break
 
+def generate_podcast(json_path: Path, interactive: bool = False, cleanup: bool = False):
+    """Generate podcast from JSON specification."""
+    try:
+        logger.info(f"Generating podcast from: {json_path}")
+        
+        # Initialize generator
+        generator = PodcastGenerator(
+            output_dir=OUTPUT_DIR / "podcasts",
+            cleanup_segments=cleanup
+        )
+        
+        # Test connections
+        logger.info("Testing service connections...")
+        status = generator.test_connections()
+        
+        if "error" in status:
+            logger.error(f"Connection test failed: {status['error']}")
+            return
+            
+        if not status["voice_service"]:
+            logger.error("Voice service connection failed")
+            return
+            
+        if not status["output_directory"]:
+            logger.error("Cannot write to output directory")
+            return
+            
+        logger.info("Service connections verified")
+        
+        # Generate podcast
+        project_name = json_path.stem
+        if interactive:
+            custom_name = input(f"Enter project name [{project_name}]: ").strip()
+            if custom_name:
+                project_name = custom_name
+        
+        podcast_file, metadata = generator.generate_podcast(
+            json_path=json_path,
+            project_name=project_name
+        )
+        
+        # Save metadata
+        metadata_file = podcast_file.parent / f"{project_name}_metadata.json"
+        with open(metadata_file, 'w', encoding='utf-8') as f:
+            json.dump(metadata, f, indent=2)
+        
+        logger.info(f"Generated podcast: {podcast_file}")
+        logger.info(f"Metadata saved to: {metadata_file}")
+        
+        # Print summary
+        print("\nPodcast Generation Summary:")
+        print(f"Title: {metadata['title']}")
+        print(f"Format: {metadata['format']}")
+        print(f"Technical Level: {metadata['technical_level']}")
+        print(f"Duration: {metadata['duration']}")
+        print(f"Segments: {metadata['segments']}")
+        print(f"Technical Terms: {metadata['technical_terms']}")
+        print(f"\nOutput: {metadata['output_file']}")
+        
+    except Exception as e:
+        logger.error(f"Failed to generate podcast: {e}")
+        if interactive:
+            logger.debug("Error details:", exc_info=True)
+
 def main():
     """Main entry point for the CLI."""
     parser = argparse.ArgumentParser(description="Convert documents to podcast-style audio")
+    
+    # Keep existing arguments
     parser.add_argument("--debug", action="store_true", help="Enable debug logging")
     parser.add_argument("--format", choices=["host_expert", "two_experts", "panel"],
                        help="Override script format")
     parser.add_argument("--interactive", "-i", action="store_true",
                        help="Enable interactive mode with confirmations")
     
+    # Add podcast generation arguments
+    parser.add_argument("--podcast", type=Path,
+                       help="Generate podcast from JSON file")
+    parser.add_argument("--cleanup", action="store_true",
+                       help="Clean up individual audio segments after merging")
+    
     args = parser.parse_args()
     
-    # Configure logging with more detailed format
+    # Configure logging
     log_level = logging.DEBUG if args.debug else logging.INFO
     logging.basicConfig(
         level=log_level,
@@ -101,19 +170,29 @@ def main():
         ]
     )
     
-    logger.info("Starting Text2Pod processing")
-    logger.debug(f"Debug mode: {args.debug}")
+    logger.info("Starting Text2Pod")
+    logger.debug(f"Arguments: {args}")
     
     # Ensure output directory exists
     OUTPUT_DIR.mkdir(exist_ok=True)
     
     try:
-        process_input_directory(interactive=args.interactive)
-        logger.info("Processing complete")
+        if args.podcast:
+            # Generate podcast from JSON
+            generate_podcast(
+                json_path=args.podcast,
+                interactive=args.interactive,
+                cleanup=args.cleanup
+            )
+        else:
+            # Run existing document processing
+            process_input_directory(interactive=args.interactive)
+            
+            # Log final usage report
+            from utils.openai_client import token_manager
+            token_manager.log_usage_report()
         
-        # Log final usage report
-        from src.utils.openai_client import token_manager
-        token_manager.log_usage_report()
+        logger.info("Processing complete")
         
     except Exception as e:
         logger.exception("Fatal error occurred")

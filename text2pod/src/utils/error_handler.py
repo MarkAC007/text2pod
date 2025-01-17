@@ -48,7 +48,11 @@ def retry_on_error(
         return wrapper
     return decorator
 
-class Text2PodError(Exception):
+class ProcessingError(Exception):
+    """Base exception class for all processing errors."""
+    pass
+
+class Text2PodError(ProcessingError):
     """Base exception class for Text2Pod."""
     pass
 
