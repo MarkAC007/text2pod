@@ -78,3 +78,45 @@
 2025-01-17 14:06:12,522 - src.utils.openai_client - INFO - Starting content analysis with model: gpt-4o-mini
 2025-01-17 14:06:12,522 - src.utils.openai_client - ERROR - OpenAI API error: name 'time' is not defined
 2025-01-17 14:06:12,522 - src.utils.error_handler - WARNING - Attempt 2 failed: OpenAI API error: name 'time' is not defined. Retrying...
+2025-01-17 14:08:35,990 - __main__ - INFO - Starting Text2Pod processing
+2025-01-17 14:08:35,991 - __main__ - INFO - Found 1 PDF files to process
+2025-01-17 14:08:35,992 - __main__ - INFO - Processing: Modern_DevOps_Practices.pdf
+2025-01-17 14:08:35,992 - __main__ - INFO - File size: 6497.35 KB
+2025-01-17 14:08:43,367 - __main__ - INFO - Successfully processed Modern_DevOps_Practices.pdf: 518 pages
+2025-01-17 14:08:43,368 - __main__ - INFO - Generating script for Modern_DevOps_Practices.pdf
+2025-01-17 14:08:43,368 - src.script_generator - INFO - Initializing script generator
+2025-01-17 14:08:43,369 - src.script_generator - INFO - Starting content analysis
+2025-01-17 14:08:43,370 - src.utils.openai_client - INFO - Starting content analysis with model: gpt-4o-mini
+2025-01-17 14:08:47,503 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-17 14:08:47,515 - src.utils.openai_client - INFO - OpenAI API response received in 4.14 seconds
+2025-01-17 14:08:47,516 - src.script_generator - INFO - Received 5 suggested segments
+2025-01-17 14:08:47,516 - src.script_generator - INFO - Format recommendation: host_expert
+2025-01-17 14:08:47,516 - src.script_generator - INFO - Reasoning: The chosen 'host_expert' format is well-suited for presenting content on Modern DevOps Practices due to the content's complexity and technical depth. The topic is highly specialized and involves various tools and techniques that can benefit from an expert's insights during the podcast. Engaging a single expert as the host facilitates in-depth exploration of the subject matter while allowing listeners to grasp intricate concepts without being overwhelmed. The content does not reflect numerous distinct viewpoints or strong contrasting opinions that would necessitate a panel or dual-expert format, making a focused conversation beneficial for clarity and engagement. This format will ensure that listeners can follow along easily and benefit from detailed explanations and practical tips shared by the expert.
+2025-01-17 14:08:47,516 - src.script_generator - INFO - Starting content segmentation
+2025-01-17 14:08:47,517 - src.script_generator - INFO - Created segment: Introduction to DevOps and its importance (5889 chars)
+2025-01-17 14:08:47,517 - src.script_generator - INFO - Created segment: Cutting-edge tools for DevOps implementation (5349 chars)
+2025-01-17 14:08:47,517 - src.script_generator - INFO - Created segment: Best practices for securing DevOps in the cloud (7076 chars)
+2025-01-17 14:08:47,517 - src.script_generator - INFO - Created segment: Tips and tricks for effective DevOps strategies (5332 chars)
+2025-01-17 14:08:47,518 - src.script_generator - INFO - Created segment: Case studies and real-world applications (5576 chars)
+2025-01-17 14:08:47,595 - src.script_generator - INFO - Created final segment: Segment 6 (709414 chars)
+2025-01-17 14:08:47,595 - src.script_generator - INFO - Content segmentation complete. Created 6 segments
+2025-01-17 14:08:47,603 - __main__ - INFO - Script saved to: c:\github\text2pod\text2pod\output\Modern_DevOps_Practices_script.json
+2025-01-17 14:08:47,604 - __main__ - INFO - Processing complete
+2025-01-17 14:15:45,963 - __main__ - INFO - Starting Text2Pod processing
+2025-01-17 14:15:45,964 - __main__ - INFO - Found 1 PDF files to process
+2025-01-17 14:15:45,964 - __main__ - INFO - Processing: Modern_DevOps_Practices.pdf
+2025-01-17 14:15:45,964 - __main__ - INFO - File size: 6497.35 KB
+2025-01-17 14:15:53,695 - src.document_processor - INFO - Analyzing document structure
+2025-01-17 14:15:53,695 - src.utils.content_analyzer - INFO - Analyzing document structure
+2025-01-17 14:15:53,696 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 14:15:57,024 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-17 14:15:57,032 - src.utils.openai_client - INFO - OpenAI API response received in 3.34 seconds
+2025-01-17 14:15:57,032 - src.utils.content_analyzer - INFO - Cleaning content based on structural analysis
+2025-01-17 14:15:57,032 - src.utils.error_handler - WARNING - Attempt 1 failed: Error extracting text: Error analyzing document structure: string indices must be integers. Retrying...
+2025-01-17 14:16:07,929 - src.document_processor - INFO - Analyzing document structure
+2025-01-17 14:16:07,930 - src.utils.content_analyzer - INFO - Analyzing document structure
+2025-01-17 14:16:07,930 - src.utils.openai_client - INFO - Getting completion with model: gpt-4o-mini
+2025-01-17 14:16:10,624 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-17 14:16:10,631 - src.utils.openai_client - INFO - OpenAI API response received in 2.70 seconds
+2025-01-17 14:16:10,631 - src.utils.content_analyzer - INFO - Cleaning content based on structural analysis
+2025-01-17 14:16:10,633 - src.utils.error_handler - WARNING - Attempt 2 failed: Error extracting text: Error analyzing document structure: string indices must be integers. Retrying...

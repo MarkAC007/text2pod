@@ -8,6 +8,7 @@ import PyPDF2
 from src.utils.config import INPUT_DIR
 from src.utils.error_handler import DocumentProcessingError, retry_on_error
 from src.utils.progress import ProgressTracker
+from src.utils.content_analyzer import analyze_document_structure
 
 logger = logging.getLogger(__name__)
 
@@ -15,11 +16,7 @@ class DocumentProcessor:
     """Handles the processing of input documents."""
     
     def __init__(self, file_path: Path):
-        """Initialize the document processor.
-        
-        Args:
-            file_path: Path to the input document (Path object)
-        """
+        """Initialize the document processor."""
         self.file_path = file_path if isinstance(file_path, Path) else Path(file_path)
             
         if not self.file_path.exists():
@@ -31,15 +28,12 @@ class DocumentProcessor:
     
     @retry_on_error()
     def extract_text(self) -> Dict[int, str]:
-        """Extract text content from the document.
-        
-        Returns:
-            Dict mapping page numbers to text content
-        """
+        """Extract and clean text content from the document."""
         content = {}
         progress = None
         
         try:
+            # Extract raw content
             with open(self.file_path, 'rb') as file:
                 pdf_reader = PyPDF2.PdfReader(file)
                 total_pages = len(pdf_reader.pages)
@@ -57,6 +51,16 @@ class DocumentProcessor:
                         content[page_num + 1] = text
                     
                     progress.update(1)
+            
+            # Analyze and clean content
+            logger.info("Analyzing document structure")
+            analysis = analyze_document_structure(content)
+            
+            logger.info(f"Cleaned content: {analysis['metadata']['cleaned_pages']} pages " +
+                       f"(from {analysis['metadata']['original_pages']} original pages)")
+            logger.debug(f"Structure notes: {analysis['metadata']['structure_notes']}")
+            
+            return analysis['main_content']
                 
         except Exception as e:
             raise DocumentProcessingError(f"Error extracting text: {str(e)}")
@@ -64,21 +68,9 @@ class DocumentProcessor:
         finally:
             if progress:
                 progress.close()
-        
-        if not content:
-            raise DocumentProcessingError("No text content extracted from document")
-            
-        return content
-    
+
     def _clean_text(self, text: str) -> str:
-        """Clean extracted text content.
-        
-        Args:
-            text: Raw extracted text
-            
-        Returns:
-            Cleaned text
-        """
+        """Clean extracted text content."""
         if not text:
             return ""
             
