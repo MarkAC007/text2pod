@@ -4,3 +4,4 @@
 text2pod/.env
 *.log
 *.pyc
+*.mp3

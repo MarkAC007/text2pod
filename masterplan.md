@@ -233,3 +233,21 @@ segment_id,voice_id,text,stability,clarity,style
 intro_001,host_voice,"Welcome to...",0.5,0.8,0.3
 expert_001,expert_voice,"The technical aspect...",0.6,0.9,0.2
 ```
+
+# Text2Pod Master Plan
+
+## Components
+
+### Voice Generation (ElevenLabs)
+- ✅ Working implementation in `scripts/test_elevenlabs.py`
+- Uses direct REST API calls for reliability
+- Features:
+  - Voice listing and selection
+  - Text-to-speech generation
+  - Custom voice settings
+  - MP3 output
+- Key voice parameters:
+  - Voice: Jessica (American, expressive, conversational)
+  - Model: eleven_monolingual_v1
+  - Settings: stability=0.71, similarity_boost=0.5
+- Reference for future voice processor implementation
