@@ -1,3 +1,80 @@
 2025-01-17 13:24:45,944 - __main__ - ERROR - File not found: c:\github\text2pod\text2pod\input\input\Modern_DevOps_Practices.pdf
 2025-01-17 13:28:51,220 - __main__ - INFO - Found 1 PDF files to process
 2025-01-17 13:28:51,220 - __main__ - INFO - Processing: Modern_DevOps_Practices.pdf
+2025-01-17 14:02:31,480 - __main__ - INFO - Found 2 PDF files to process
+2025-01-17 14:02:31,481 - __main__ - INFO - Processing: Modern_DevOps_Practices.pdf
+2025-01-17 14:02:39,441 - __main__ - INFO - Generating script...
+2025-01-17 14:02:39,442 - src.script_generator - INFO - Analyzing content with OpenAI...
+2025-01-17 14:02:44,019 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-17 14:02:44,033 - src.script_generator - INFO - Format recommendation: host_expert
+2025-01-17 14:02:44,034 - src.script_generator - INFO - Reasoning: The content is about implementing and securing DevOps practices in the public cloud, which is a technical subject likely to have considerable depth but is generally accessible. Utilizing a host_expert format allows for a deep dive into specific tools, techniques, and methodologies by having a knowledgeable host who can guide the conversation and extract insights effectively from a technical expert. This format works well for complex subjects, as it allows for an organized, structured approach to discussing the various elements of DevOps practices without overwhelming the audience. While the content does not indicate multiple distinct viewpoints, it offers opportunities to explore best practices, which can keep the conversation engaging.
+2025-01-17 14:02:44,107 - __main__ - INFO - Processing: sample.pdf
+2025-01-17 14:02:44,110 - __main__ - INFO - Generating script...
+2025-01-17 14:02:44,110 - src.script_generator - INFO - Analyzing content with OpenAI...
+2025-01-17 14:02:46,637 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-17 14:02:46,639 - src.script_generator - INFO - Format recommendation: host_expert
+2025-01-17 14:02:46,639 - src.script_generator - INFO - Reasoning: The content is relatively straightforward and serves primarily to demonstrate functionality rather than present complex ideas or multiple viewpoints. A host with a single expert can discuss the intricacies of text extraction methods from PDFs, maintaining engagement while providing insights without overwhelming the audience. The lack of distinct contrasting viewpoints makes a dialogue between multiple experts less necessary, and the technical depth is moderate, making a traditional interview format more suitable.
+2025-01-17 14:05:52,823 - __main__ - INFO - Starting Text2Pod processing
+2025-01-17 14:05:52,824 - __main__ - INFO - Found 2 PDF files to process
+2025-01-17 14:05:52,824 - __main__ - INFO - Processing: Modern_DevOps_Practices.pdf
+2025-01-17 14:05:52,824 - __main__ - INFO - File size: 6497.35 KB
+2025-01-17 14:06:00,400 - __main__ - INFO - Successfully processed Modern_DevOps_Practices.pdf: 518 pages
+2025-01-17 14:06:00,401 - __main__ - INFO - Generating script for Modern_DevOps_Practices.pdf
+2025-01-17 14:06:00,401 - src.script_generator - INFO - Initializing script generator
+2025-01-17 14:06:00,402 - src.script_generator - INFO - Starting content analysis
+2025-01-17 14:06:00,403 - src.utils.openai_client - INFO - Starting content analysis with model: gpt-4o-mini
+2025-01-17 14:06:00,403 - src.utils.openai_client - ERROR - OpenAI API error: name 'time' is not defined
+2025-01-17 14:06:00,403 - src.utils.error_handler - WARNING - Attempt 1 failed: OpenAI API error: name 'time' is not defined. Retrying...
+2025-01-17 14:06:01,409 - src.utils.openai_client - INFO - Starting content analysis with model: gpt-4o-mini
+2025-01-17 14:06:01,410 - src.utils.openai_client - ERROR - OpenAI API error: name 'time' is not defined
+2025-01-17 14:06:01,410 - src.utils.error_handler - WARNING - Attempt 2 failed: OpenAI API error: name 'time' is not defined. Retrying...
+2025-01-17 14:06:02,417 - src.utils.openai_client - INFO - Starting content analysis with model: gpt-4o-mini
+2025-01-17 14:06:02,419 - src.utils.openai_client - ERROR - OpenAI API error: name 'time' is not defined
+2025-01-17 14:06:02,419 - src.utils.error_handler - ERROR - Failed after 3 attempts: OpenAI API error: name 'time' is not defined
+2025-01-17 14:06:02,419 - src.utils.error_handler - WARNING - Attempt 1 failed: OpenAI API error: name 'time' is not defined. Retrying...
+2025-01-17 14:06:03,431 - src.script_generator - INFO - Starting content analysis
+2025-01-17 14:06:03,431 - src.utils.openai_client - INFO - Starting content analysis with model: gpt-4o-mini
+2025-01-17 14:06:03,432 - src.utils.openai_client - ERROR - OpenAI API error: name 'time' is not defined
+2025-01-17 14:06:03,433 - src.utils.error_handler - WARNING - Attempt 1 failed: OpenAI API error: name 'time' is not defined. Retrying...
+2025-01-17 14:06:04,441 - src.utils.openai_client - INFO - Starting content analysis with model: gpt-4o-mini
+2025-01-17 14:06:04,441 - src.utils.openai_client - ERROR - OpenAI API error: name 'time' is not defined
+2025-01-17 14:06:04,442 - src.utils.error_handler - WARNING - Attempt 2 failed: OpenAI API error: name 'time' is not defined. Retrying...
+2025-01-17 14:06:05,453 - src.utils.openai_client - INFO - Starting content analysis with model: gpt-4o-mini
+2025-01-17 14:06:05,454 - src.utils.openai_client - ERROR - OpenAI API error: name 'time' is not defined
+2025-01-17 14:06:05,454 - src.utils.error_handler - ERROR - Failed after 3 attempts: OpenAI API error: name 'time' is not defined
+2025-01-17 14:06:05,455 - src.utils.error_handler - WARNING - Attempt 2 failed: OpenAI API error: name 'time' is not defined. Retrying...
+2025-01-17 14:06:06,463 - src.script_generator - INFO - Starting content analysis
+2025-01-17 14:06:06,463 - src.utils.openai_client - INFO - Starting content analysis with model: gpt-4o-mini
+2025-01-17 14:06:06,464 - src.utils.openai_client - ERROR - OpenAI API error: name 'time' is not defined
+2025-01-17 14:06:06,464 - src.utils.error_handler - WARNING - Attempt 1 failed: OpenAI API error: name 'time' is not defined. Retrying...
+2025-01-17 14:06:07,470 - src.utils.openai_client - INFO - Starting content analysis with model: gpt-4o-mini
+2025-01-17 14:06:07,470 - src.utils.openai_client - ERROR - OpenAI API error: name 'time' is not defined
+2025-01-17 14:06:07,470 - src.utils.error_handler - WARNING - Attempt 2 failed: OpenAI API error: name 'time' is not defined. Retrying...
+2025-01-17 14:06:08,471 - src.utils.openai_client - INFO - Starting content analysis with model: gpt-4o-mini
+2025-01-17 14:06:08,471 - src.utils.openai_client - ERROR - OpenAI API error: name 'time' is not defined
+2025-01-17 14:06:08,471 - src.utils.error_handler - ERROR - Failed after 3 attempts: OpenAI API error: name 'time' is not defined
+2025-01-17 14:06:08,471 - src.utils.error_handler - ERROR - Failed after 3 attempts: OpenAI API error: name 'time' is not defined
+2025-01-17 14:06:08,472 - __main__ - ERROR - Error processing Modern_DevOps_Practices.pdf: OpenAI API error: name 'time' is not defined
+2025-01-17 14:06:08,472 - __main__ - INFO - Processing: sample.pdf
+2025-01-17 14:06:08,472 - __main__ - INFO - File size: 1.05 KB
+2025-01-17 14:06:08,476 - __main__ - INFO - Successfully processed sample.pdf: 1 pages
+2025-01-17 14:06:08,477 - __main__ - INFO - Generating script for sample.pdf
+2025-01-17 14:06:08,477 - src.script_generator - INFO - Initializing script generator
+2025-01-17 14:06:08,478 - src.script_generator - INFO - Starting content analysis
+2025-01-17 14:06:08,478 - src.utils.openai_client - INFO - Starting content analysis with model: gpt-4o-mini
+2025-01-17 14:06:08,478 - src.utils.openai_client - ERROR - OpenAI API error: name 'time' is not defined
+2025-01-17 14:06:08,478 - src.utils.error_handler - WARNING - Attempt 1 failed: OpenAI API error: name 'time' is not defined. Retrying...
+2025-01-17 14:06:09,482 - src.utils.openai_client - INFO - Starting content analysis with model: gpt-4o-mini
+2025-01-17 14:06:09,483 - src.utils.openai_client - ERROR - OpenAI API error: name 'time' is not defined
+2025-01-17 14:06:09,483 - src.utils.error_handler - WARNING - Attempt 2 failed: OpenAI API error: name 'time' is not defined. Retrying...
+2025-01-17 14:06:10,493 - src.utils.openai_client - INFO - Starting content analysis with model: gpt-4o-mini
+2025-01-17 14:06:10,493 - src.utils.openai_client - ERROR - OpenAI API error: name 'time' is not defined
+2025-01-17 14:06:10,493 - src.utils.error_handler - ERROR - Failed after 3 attempts: OpenAI API error: name 'time' is not defined
+2025-01-17 14:06:10,494 - src.utils.error_handler - WARNING - Attempt 1 failed: OpenAI API error: name 'time' is not defined. Retrying...
+2025-01-17 14:06:11,506 - src.script_generator - INFO - Starting content analysis
+2025-01-17 14:06:11,507 - src.utils.openai_client - INFO - Starting content analysis with model: gpt-4o-mini
+2025-01-17 14:06:11,507 - src.utils.openai_client - ERROR - OpenAI API error: name 'time' is not defined
+2025-01-17 14:06:11,507 - src.utils.error_handler - WARNING - Attempt 1 failed: OpenAI API error: name 'time' is not defined. Retrying...
+2025-01-17 14:06:12,522 - src.utils.openai_client - INFO - Starting content analysis with model: gpt-4o-mini
+2025-01-17 14:06:12,522 - src.utils.openai_client - ERROR - OpenAI API error: name 'time' is not defined
+2025-01-17 14:06:12,522 - src.utils.error_handler - WARNING - Attempt 2 failed: OpenAI API error: name 'time' is not defined. Retrying...

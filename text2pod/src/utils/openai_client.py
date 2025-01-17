@@ -1,5 +1,6 @@
 """OpenAI API client utilities."""
 import logging
+import time
 from typing import Dict, List, Optional
 
 import openai
@@ -16,38 +17,47 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 def analyze_content(content: str) -> Dict:
     """Analyze content using OpenAI to determine best podcast format."""
     try:
-        prompt = f"""Analyze this content and recommend the best podcast format. Consider:
-1. Content complexity
-2. Number of distinct viewpoints
-3. Technical depth
-4. Natural conversation flow
+        logger.info(f"Starting content analysis with model: {OPENAI_MODEL}")
+        logger.debug(f"Content length: {len(content)} characters")
+        
+        system_prompt = """<purpose>
+    You are an expert at analyzing content to determine the optimal podcast format based on content characteristics.
+    You follow the instructions perfectly to evaluate content and select the best-suited podcast format.
+</purpose>
 
-Available formats:
-- host_expert: Traditional interview with host and subject expert
-- two_experts: Dialogue between two experts with different perspectives
-- panel: Multiple experts discussing various aspects
+<instructions>
+    <instruction>Evaluate the content based on key factors: Content complexity level, Number of distinct viewpoints present, Technical depth of material, Natural conversation potential.</instruction>
+    <instruction>Consider available podcast formats: host_expert: Traditional interview format, two_experts: Dialogue between different perspectives, panel: Multi-expert discussion.</instruction>
+    <instruction>Analyze content structure for: Main topics and subtopics, Technical concepts, Contrasting viewpoints, Discussion points.</instruction>
+    <instruction>Generate JSON response containing: Recommended format, Detailed reasoning, Suggested content segments.</instruction>
+    <instruction>Format output as: { "format": "chosen_format", "reasoning": "detailed explanation", "suggested_segments": ["topic1", "topic2", ...] }</instruction>
+    <instruction>Ensure reasoning addresses: Why the format best fits the content, How it handles the complexity, How it manages multiple viewpoints, How it maintains engagement.</instruction>
+</instructions>"""
 
-Provide your response in JSON format:
-{{
-    "format": "chosen_format",
-    "reasoning": "detailed explanation",
-    "suggested_segments": ["topic1", "topic2", ...]
-}}
+        user_prompt = f"""<content>
+    {content[:2000]}...
+</content>"""
 
-Content to analyze:
-{content[:2000]}...
-"""
-
+        logger.debug("Sending request to OpenAI API")
+        start_time = time.time()
+        
         response = client.chat.completions.create(
             model=OPENAI_MODEL,
             messages=[
-                {"role": "system", "content": "You are a podcast format analyst."},
-                {"role": "user", "content": prompt}
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
             ],
             response_format={ "type": "json_object" }
         )
         
-        return response.choices[0].message.content
+        elapsed_time = time.time() - start_time
+        logger.info(f"OpenAI API response received in {elapsed_time:.2f} seconds")
+        
+        result = response.choices[0].message.content
+        logger.debug(f"Raw API response: {result}")
+        
+        return result
 
     except Exception as e:
+        logger.error(f"OpenAI API error: {str(e)}")
         raise APIError(f"OpenAI API error: {str(e)}") 

@@ -30,12 +30,15 @@ def process_input_directory():
         try:
             # Process document
             logger.info(f"Processing: {pdf_file.name}")
+            logger.info(f"File size: {pdf_file.stat().st_size / 1024:.2f} KB")
+            
             processor = DocumentProcessor(pdf_file)
             content = processor.extract_text()
-            print(f"Successfully processed {pdf_file.name}: {len(content)} pages")
+            logger.info(f"Successfully processed {pdf_file.name}: {len(content)} pages")
+            logger.debug(f"Total extracted text size: {sum(len(text) for text in content.values())} characters")
             
             # Generate script
-            logger.info("Generating script...")
+            logger.info(f"Generating script for {pdf_file.name}")
             generator = ScriptGenerator(content)
             script = generator.generate_script()
             
@@ -43,6 +46,8 @@ def process_input_directory():
             output_file = OUTPUT_DIR / f"{pdf_file.stem}_script.json"
             with open(output_file, 'w', encoding='utf-8') as f:
                 json.dump(script, f, indent=2, ensure_ascii=False)
+            logger.info(f"Script saved to: {output_file}")
+            logger.debug(f"Script size: {output_file.stat().st_size / 1024:.2f} KB")
             print(f"Script generated: {output_file}")
             
         except Text2PodError as e:
@@ -59,18 +64,26 @@ def main():
     
     args = parser.parse_args()
     
-    # Configure logging
+    # Configure logging with more detailed format
     log_level = logging.DEBUG if args.debug else logging.INFO
     logging.basicConfig(
         level=log_level,
-        format='%(asctime)s - %(levelname)s - %(message)s'
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.FileHandler('text2pod.log'),
+            logging.StreamHandler()
+        ]
     )
+    
+    logger.info("Starting Text2Pod processing")
+    logger.debug(f"Debug mode: {args.debug}")
     
     # Ensure output directory exists
     OUTPUT_DIR.mkdir(exist_ok=True)
     
     try:
         process_input_directory()
+        logger.info("Processing complete")
     except Exception as e:
         logger.exception("Fatal error occurred")
         sys.exit(1)

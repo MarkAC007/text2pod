@@ -25,31 +25,29 @@ class ScriptGenerator:
     """Handles the generation of dialogue scripts from processed text."""
     
     def __init__(self, content: Dict[int, str]):
-        """Initialize the script generator.
+        """Initialize the script generator."""
+        logger.info("Initializing script generator")
+        logger.debug(f"Content received: {len(content)} pages")
         
-        Args:
-            content: Dictionary mapping page numbers to text content
-        """
         self.content = content
         self.format = None
         self.segments = []
         
         # Combine all content for analysis
         self.full_text = "\n".join(content.values())
+        logger.debug(f"Combined text length: {len(self.full_text)} characters")
     
     def analyze_content(self) -> str:
-        """Analyze content using OpenAI to suggest best script format.
-        
-        Returns:
-            Suggested format (HOST_EXPERT, TWO_EXPERTS, or PANEL)
-        """
-        logger.info("Analyzing content with OpenAI...")
+        """Analyze content using OpenAI to suggest best script format."""
+        logger.info("Starting content analysis")
         
         # Get OpenAI's analysis
         analysis = json.loads(analyze_content(self.full_text))
         
         # Store the suggested segments for later use
         self.suggested_segments = analysis.get('suggested_segments', [])
+        logger.info(f"Received {len(self.suggested_segments)} suggested segments")
+        logger.debug(f"Suggested segments: {self.suggested_segments}")
         
         # Log the reasoning
         logger.info(f"Format recommendation: {analysis['format']}")
@@ -60,20 +58,25 @@ class ScriptGenerator:
     
     def segment_content(self) -> List[Dict]:
         """Break content into logical segments based on OpenAI suggestions."""
+        logger.info("Starting content segmentation")
+        
         if not self.suggested_segments:
-            self.analyze_content()  # Get segments if not already analyzed
+            logger.debug("No segments found, running content analysis")
+            self.analyze_content()
         
         segments = []
         current_segment = {"content": "", "key_points": []}
         segment_index = 0
         
         for page_num, text in self.content.items():
+            logger.debug(f"Processing page {page_num}")
             current_segment["content"] += f"\n{text}"
             
             # Use suggested segments as titles and break points
             if len(current_segment["content"]) > MAX_SEGMENT_LENGTH and segment_index < len(self.suggested_segments):
                 current_segment["title"] = self.suggested_segments[segment_index]
                 segments.append(current_segment)
+                logger.info(f"Created segment: {current_segment['title']} ({len(current_segment['content'])} chars)")
                 current_segment = {"content": "", "key_points": []}
                 segment_index += 1
         
@@ -85,7 +88,9 @@ class ScriptGenerator:
                 else f"Segment {len(segments) + 1}"
             )
             segments.append(current_segment)
+            logger.info(f"Created final segment: {current_segment['title']} ({len(current_segment['content'])} chars)")
         
+        logger.info(f"Content segmentation complete. Created {len(segments)} segments")
         self.segments = segments
         return segments
     
