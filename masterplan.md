@@ -234,20 +234,159 @@ intro_001,host_voice,"Welcome to...",0.5,0.8,0.3
 expert_001,expert_voice,"The technical aspect...",0.6,0.9,0.2
 ```
 
+### 7.3 JSON to Voice Pipeline
+
+#### Input JSON Structure
+```json
+{
+    "podcast_format": {
+        "style": "interview",
+        "technical_level": "intermediate",
+        "estimated_duration": "25min"
+    },
+    "segments": [
+        {
+            "id": "intro_001",
+            "speaker": "host",
+            "content": "Welcome to today's technical discussion...",
+            "tone": "welcoming",
+            "technical_terms": []
+        },
+        {
+            "id": "expert_001",
+            "speaker": "expert",
+            "content": "Let me explain the key technical concepts...",
+            "tone": "authoritative",
+            "technical_terms": ["term1", "term2"]
+        }
+    ],
+    "technical_glossary": {
+        "term1": "Definition 1",
+        "term2": "Definition 2"
+    }
+}
+```
+
+#### Processing Pipeline
+```mermaid
+flowchart LR
+    A[Input JSON] --> B[Segment Parser]
+    B --> C[Voice Mapper]
+    C --> D[Speech Generator]
+    D --> E[Audio Assembler]
+    
+    subgraph Segment Processing
+        SP1[Parse Segments]
+        SP2[Apply Speaking Style]
+        SP3[Handle Technical Terms]
+    end
+    
+    subgraph Voice Assignment
+        VA1[Map Speakers to Voices]
+        VA2[Apply Voice Settings]
+        VA3[Set Tone Parameters]
+    end
+    
+    subgraph Audio Generation
+        AG1[Generate Segments]
+        AG2[Add Transitions]
+        AG3[Merge Audio]
+    end
+```
+
+#### Processing Steps
+1. JSON Parsing
+   - Load and validate JSON structure
+   - Extract podcast format settings
+   - Parse segments into voice tasks
+   - Build pronunciation guide from glossary
+
+2. Voice Assignment
+   - Map speakers to ElevenLabs voices
+   - Configure voice parameters per segment
+   - Apply tone and style settings
+   - Handle technical term pronunciation
+
+3. Audio Generation
+   - Generate individual segments
+   - Add inter-segment transitions
+   - Apply audio normalization
+   - Create final podcast assembly
+
+4. Output Management
+   - Save individual segments
+   - Generate combined audio
+   - Create processing report
+   - Store segment metadata
+
+#### Implementation Components
+```python
+# Core Classes
+class JSONProcessor:
+    """Handles JSON parsing and validation"""
+    
+class VoiceMapper:
+    """Maps speakers to ElevenLabs voices"""
+    
+class AudioGenerator:
+    """Generates and processes audio segments"""
+    
+class PodcastAssembler:
+    """Assembles final podcast from segments"""
+
+# Processing Flow
+json_data -> JSONProcessor
+    -> VoiceMapper
+    -> AudioGenerator
+    -> PodcastAssembler
+    -> final_output
+```
+
 # Text2Pod Master Plan
 
 ## Components
 
 ### Voice Generation (ElevenLabs)
 - ✅ Working implementation in `scripts/test_elevenlabs.py`
-- Uses direct REST API calls for reliability
-- Features:
+  - Direct REST API calls for reliability
   - Voice listing and selection
   - Text-to-speech generation
   - Custom voice settings
   - MP3 output
-- Key voice parameters:
-  - Voice: Jessica (American, expressive, conversational)
-  - Model: eleven_monolingual_v1
+
+- ✅ Multi-voice conversations in `scripts/test_voice_conversation.py`
+  - Host and expert voice selection
+  - Natural conversation flow
+  - Individual segment generation
+  - Audio segment merging with crossfade
+  - Complete conversation output
+
+### Voice Parameters
+- Host Voice (Jessica)
+  - American accent
+  - Expressive style
+  - Conversational tone
   - Settings: stability=0.71, similarity_boost=0.5
-- Reference for future voice processor implementation
+
+- Expert Voice (Daniel)
+  - British accent
+  - Authoritative style
+  - Technical precision
+  - Settings: stability=0.71, similarity_boost=0.5
+
+### Audio Processing
+- Dependencies:
+  - ffmpeg for audio manipulation
+  - pydub for segment merging
+- Features:
+  - Segment concatenation
+  - Crossfade transitions (500ms)
+  - Individual segment preservation
+  - Combined conversation output
+
+### Future Voice Enhancements
+- Volume normalization
+- Silence padding between segments
+- Background music integration
+- Multiple expert voices
+- Dynamic voice settings per role
