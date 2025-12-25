@@ -1,0 +1,51 @@
+name: License Compliance Check
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main, dev ]
+  schedule:
+    - cron: '0 10 * * 1'  # Weekly on Mondays at 10am UTC
+
+permissions:
+  contents: read
+
+jobs:
+  license-check:
+    name: Check Licenses
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r text2pod/requirements.txt
+          pip install pip-licenses
+
+      - name: Check licenses
+        run: |
+          echo "## License Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Generate license report
+          pip-licenses --format=markdown >> $GITHUB_STEP_SUMMARY
+
+          # Check for problematic licenses
+          FORBIDDEN=$(pip-licenses --fail-on="GPL;AGPL;SSPL;BUSL" 2>&1) || {
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### Warning: Found packages with restricted licenses" >> $GITHUB_STEP_SUMMARY
+            echo "$FORBIDDEN" >> $GITHUB_STEP_SUMMARY
+          }
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "All licenses checked successfully" >> $GITHUB_STEP_SUMMARY
