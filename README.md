@@ -1,4 +1,5 @@
 # Text2Pod
+[\![Release](https://github.com/MarkAC007/text2pod/actions/workflows/auto-release.yml/badge.svg)](https://github.com/MarkAC007/text2pod/actions/workflows/auto-release.yml)
 
 <p align="center">
   <strong>Transform Documents into Engaging Podcast-Style Audio</strong>
@@ -70,7 +71,7 @@ cd text2pod
 
 # Create virtual environment
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+source venv/bin/activate  # Windows: venv\Scriptsctivate
 
 # Install dependencies
 pip install -r text2pod/requirements.txt
